@@ -43,7 +43,7 @@ const Nav = ({ onSearch }) => {
     const fetchCards = async () => {
       try {
         const response = await axios.get(
-          "https://medi-shop-server.vercel.app/cards"
+          "https://server-zeta-nine-87.vercel.app/cards"
         );
         setCards(response.data);
       } catch (error) {

@@ -16,7 +16,7 @@ const ProductPage = () => {
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(
-        "https://medi-shop-server.vercel.app/products"
+        "https://server-zeta-nine-87.vercel.app/products"
       );
       if (!res.ok) {
         throw new Error("Network response was not ok");

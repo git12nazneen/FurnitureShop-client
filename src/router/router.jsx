@@ -45,7 +45,7 @@ const router = createBrowserRouter([
         {
           path:'/products/:id',
           element:<Card></Card>,
-          loader:({params})=>fetch(`https://medi-shop-server.vercel.app/products/${params.id}`)
+          loader:({params})=>fetch(`https://server-zeta-nine-87.vercel.app/products/${params.id}`)
         },
      
       ]
@@ -90,7 +90,7 @@ const router = createBrowserRouter([
         ,{
           path:'updateProduct/:id',
           element:<UpdateProduct></UpdateProduct>,
-          loader:({params})=>fetch(`https://medi-shop-server.vercel.app/products/${params.id}`)
+          loader:({params})=>fetch(`https://server-zeta-nine-87.vercel.app/products/${params.id}`)
         }
         ,
       ]

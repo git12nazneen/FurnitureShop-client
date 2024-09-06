@@ -11,7 +11,7 @@ const DetailsCard = () => {
     const fetchData = async () => {
       console.log(`Fetching product details for ID: ${id}`);
       try {
-        const response = await fetch(`https://medi-shop-server.vercel.app/products/${id}`);
+        const response = await fetch(`https://server-zeta-nine-87.vercel.app/products/${id}`);
         if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }

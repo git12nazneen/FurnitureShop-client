@@ -1,7 +1,7 @@
-import { useState } from "react";
+
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaApple, FaFacebook, FaGoogle, FaRegEyeSlash } from "react-icons/fa";
+import { FaApple,  FaGoogle} from "react-icons/fa";
 import login from "../assets/login.png";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from "../../firebase.config";
@@ -24,7 +24,6 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     formState: { errors },
   } = useForm();

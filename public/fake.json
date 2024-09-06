@@ -1,0 +1,139 @@
+[
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624167/wbfquzz8hadnhfisq3b8.png",
+      "title": "Ergonomic Office Chair",
+      "description": "A comfortable ergonomic office chair with lumbar support and adjustable height.",
+      "discount": "25%",
+      "originalPrice": "$200.00",
+      "price": "$150.00"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624157/ar7ojb5v3wdap2vkf3by.png",
+      "title": "Leather Recliner Chair",
+      "description": "A luxurious leather recliner chair with reclining features and a built-in footrest.",
+      "discount": "30%",
+      "originalPrice": "$300.00",
+      "price": "$210.00"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624148/szx76ipy6b0ej1jchnta.png",
+      "title": "Modern Dining Chair",
+      "description": "A stylish modern dining chair with a sleek design and comfortable seating.",
+      "discount": "15%",
+      "originalPrice": "$120.00",
+      "price": "$102.00"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624138/gkocu3ro7nyhdnwhmpqh.png",
+      "title": "Lounge Chair",
+      "description": "A cozy lounge chair perfect for relaxing with a high back and plush cushioning.",
+      "discount": "20%",
+      "originalPrice": "$180.00",
+      "price": "$144.00"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624122/mkt8sipgywci1hjcv57b.jpg",
+      "title": "Adjustable Bar Stool",
+      "description": "An adjustable bar stool with a chrome base and comfortable seating for kitchen counters or bars.",
+      "discount": "10%",
+      "originalPrice": "$90.00",
+      "price": "$81.00"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624120/vrv9rdcuyezuoxemilkl.jpg",
+      "title": "Bean Bag Chair",
+      "description": "A casual bean bag chair with a soft and flexible design, perfect for lounging.",
+      "discount": "18%",
+      "originalPrice": "$70.00",
+      "price": "$57.40"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624122/mkt8sipgywci1hjcv57b.jpg",
+      "title": "Gaming Chair",
+      "description": "A high-performance gaming chair with ergonomic features and customizable adjustments.",
+      "discount": "22%",
+      "originalPrice": "$250.00",
+      "price": "$195.00"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624120/vrv9rdcuyezuoxemilkl.jpg",
+      "title": "Accent Chair",
+      "description": "A stylish accent chair designed to complement any room decor with its unique pattern.",
+      "discount": "12%",
+      "originalPrice": "$150.00",
+      "price": "$132.00"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624077/inknfpuuuarmct6akrgz.jpg",
+      "title": "Rocking Chair",
+      "description": "A classic rocking chair made of wood, ideal for relaxation and gentle rocking.",
+      "discount": "25%",
+      "originalPrice": "$130.00",
+      "price": "$97.50"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624073/dnifbmindeycnqkbdvkz.jpg",
+      "title": "Patio Chair",
+      "description": "A durable patio chair designed for outdoor use with weather-resistant materials.",
+      "discount": "10%",
+      "originalPrice": "$85.00",
+      "price": "$76.50"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624073/zq8yigxksyvvtsoksbm4.jpg",
+      "title": "Chaise Lounge Chair",
+      "description": "An elegant chaise lounge chair for lounging with a reclining feature.",
+      "discount": "30%",
+      "originalPrice": "$220.00",
+      "price": "$154.00"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624071/uaxfuvzbksm43cgj9sfi.jpg",
+      "title": "Adjustable Desk Chair",
+      "description": "An adjustable desk chair with swivel and tilt functions for optimal workspace comfort.",
+      "discount": "20%",
+      "originalPrice": "$150.00",
+      "price": "$120.00"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624070/v3vkrljf0baxj27d7s8q.jpg",
+      "title": "Folding Chair",
+      "description": "A lightweight folding chair for easy storage and transport, ideal for events.",
+      "discount": "15%",
+      "originalPrice": "$50.00",
+      "price": "$42.50"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624066/iyihxdtudvdqs8jyvtt4.jpg",
+      "title": "Manual Recliner Chair",
+      "description": "A manual recliner chair with a lever for easy reclining and built-in cupholders.",
+      "discount": "28%",
+      "originalPrice": "$280.00",
+      "price": "$201.60"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624061/ytb8ocz4diec2gygmvoy.png",
+      "title": "Mesh Office Chair",
+      "description": "A breathable mesh office chair with adjustable armrests and lumbar support.",
+      "discount": "25%",
+      "originalPrice": "$190.00",
+      "price": "$142.50"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624049/csyllfubgh3olda6xxfh.png",
+      "title": "Mesh Chair",
+      "description": "A breathable mesh office chair with adjustable armrests and lumbar support.",
+      "discount": "25%",
+      "originalPrice": "$140.00",
+      "price": "$122.50"
+    },
+    {
+      "image": "https://res.cloudinary.com/duid69e8r/image/upload/v1725624061/g59e47ealm6doavbxxpp.png",
+      "title": " Office Chair",
+      "description": "A breathable mesh office chair with adjustable armrests and lumbar support.",
+      "discount": "25%",
+      "originalPrice": "$160.00",
+      "price": "$112.50"
+    }
+  ]
+  

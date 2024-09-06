@@ -8,7 +8,7 @@ const Allorder = () => {
   const { isLoading, error, data: cards = [] } = useQuery({
     queryKey: ["cards"],
     queryFn: async () => {
-      const res = await fetch("https://medi-shop-server.vercel.app/cards");
+      const res = await fetch("https://server-zeta-nine-87.vercel.app/cards");
       if (!res.ok) {
         throw new Error("Network response was not ok");
       }

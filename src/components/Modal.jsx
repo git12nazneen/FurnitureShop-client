@@ -85,7 +85,7 @@ const Modal = () => {
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await axios.get("https://medi-shop-server.vercel.app/cards");
+        const response = await axios.get("https://server-zeta-nine-87.vercel.app/cards");
         setCards(response.data);
       } catch (error) {
         console.error("Error fetching cards:", error);
