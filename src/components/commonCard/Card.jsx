@@ -1,5 +1,4 @@
 import { useState } from "react";
-import sergel from "../../assets/sergel.jpg";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -16,13 +15,12 @@ const Card = ({ card }) => {
     discount,
     title,
     _id,
-    packet: initialPacket, // Destructure as initialPacket
+    piece: initialpiece, // Destructure as initialpiece
   } = card;
 
-  const [packet, setPacket] = useState(initialPacket); // Initialize local packet state
+  const [piece, setpiece] = useState(initialpiece); // Initialize local piece state
   const [isAddedToCart, setIsAddedToCart] = useState(false);
 
- 
   const axiosSecure = useAxiosSecure();
 
   const { mutateAsync } = useMutation({
@@ -44,14 +42,14 @@ const Card = ({ card }) => {
     },
   });
   const handleAddToCart = async () => {
-    if (packet > 0) {
+    if (piece > 0) {
       try {
-        // Decrement packet count on the server
+        // Decrement piece count on the server
         const response = await axiosSecure.patch(`/products/${_id}/decrement`);
-        const updatedPacket = response.data.packet; // Get the updated packet count from the server
-        setPacket(updatedPacket); // Update local state
+        const updatedpiece = response.data.piece; // Get the updated piece count from the server
+        setpiece(updatedpiece); // Update local state
 
-        if (updatedPacket > 0) {
+        if (updatedpiece > 0) {
           const cardsData = {
             name,
             image,
@@ -62,7 +60,7 @@ const Card = ({ card }) => {
             originalPrice,
             discount,
             doses,
-            packet: updatedPacket,
+            piece: updatedpiece,
             email: user.email,
             userName: user.displayName,
           };
@@ -73,10 +71,10 @@ const Card = ({ card }) => {
         }
       } catch (error) {
         console.error("Error in handleAddToCart:", error);
-        toast.error("Failed to update packet count");
+        toast.error("Failed to update piece count");
       }
     } else {
-      toast.error("No more packets left");
+      toast.error("No more pieces left");
     }
   };
 
@@ -95,33 +93,30 @@ const Card = ({ card }) => {
         </h1>
       </div>
       <div className="px-6 py-2 group-hover:text-white">
-        <h1 className="text-[#60a87e] dark:text-white group-hover:text-white">
-          {description}
-        </h1>
-      
-
         <div className="flex gap-7 py-3">
-          <h2 className="text-sm font-bold group-hover:text-white">
-            {originalPrice}
+          <h2 className="text-sm font-bold group-hover:text-white  ">
+            ${price}
           </h2>
-          <h2 className="text-sm font-light group-hover:text-white text-gray-500">
-            {price}
+          <h2 className="text-sm font-bold text-gray-500 group-hover:text-white line-through">
+            ${originalPrice}
           </h2>
-          <h2 className="text-sm font-light group-hover:text-white text-red-600">
+
+          <h2 className="text-sm font-bold group-hover:text-white text-red-600">
             {discount}
           </h2>
         </div>
+        <h1 className="text-[#60a87e] mb-4 dark:text-white group-hover:text-white">
+          {description.slice(0, 50)}
+        </h1>
 
         <button
           onClick={handleAddToCart}
           className={`text-center py-3 rounded-md mb-2 w-full ${
-            packet > 0
-              ? "bg-[#0e7673] text-white"
-              : "bg-gray-400 cursor-not-allowed"
+            piece > 0 ? "bg-black text-white" : "bg-gray-400 cursor-not-allowed"
           }`}
-          disabled={packet === 0}
+          disabled={piece === 0}
         >
-          {packet > 0
+          {piece > 0
             ? isAddedToCart
               ? "View Cart"
               : "Add to cart"
