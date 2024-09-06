@@ -35,7 +35,7 @@ const DetailsCard = () => {
   }
 
   const {
-    name,
+    title,
     image,
     description,
     company,
@@ -44,57 +44,74 @@ const DetailsCard = () => {
     originalPrice,
     discount,
     doses,
-    _id,
     packet,
   } = details;
 
   return (
-    <div className="">
-      <main className="isolate my-0 md:my-0 lg:my-32">
-        {/* Hero section */}
-        <div className=" flex max-w-md lg:max-w-5xl mx-auto overflow-hidden bg-gray-100 rounded-lg shadow-lg dark:bg-gray-800">
-          <div
-            className="w-1/3 lg:w-2/3 bg-cover"
-            style={{
-              backgroundImage: `url(${
-                image ||
-                "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-              })`,
-            }}
-          ></div>
+    <div className="px-50 py-30 my-30 bg-white dark:bg-gray-900 p-5 rounded-lg shadow-lg max-w-6xl mx-auto">
+      <main className="lg:flex items-center gap-6">
+        {/* Image Section */}
+        <div
+          className="w-full lg:w-1/2 h-80 bg-cover bg-center rounded-lg overflow-hidden"
+          style={{
+            backgroundImage: `url(${
+              image ||
+              "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+            })`,
+          }}
+        ></div>
 
-          <div className="w-2/3 p-4 md:p-4">
-            <h1 className="text-xl font-bold text-gray-800 dark:text-white">
-              {name}
-            </h1>
+        {/* Product Info Section */}
+        <div className="w-full lg:w-1/2 p-6 space-y-5">
+          <h1 className="text-3xl font-semibold text-gray-800 dark:text-white">
+            {title}
+          </h1>
 
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              {capsuleInfo} || {packet} packet
+          <p className="text-lg text-gray-600 dark:text-gray-300">
+            {description}
+          </p>
+
+          {/* Company Info */}
+          {company && (
+            <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+              Manufactured by: {company}
             </p>
+          )}
 
-            <div className="flex mt-1 item-center">
-              <p className="text-sm leading-8 text-gray-600"> Doses: {doses}</p>
-            </div>
+          {/* Capsule Info and Doses */}
+          {capsuleInfo && (
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {capsuleInfo} | {doses} doses per packet
+            </p>
+          )}
 
-            <div className="flex justify-between item-center">
-              <p className="text-sm leading-8 text-gray-600 mt-1">
-                Price: ${price} (Original Price: ${originalPrice}, Discount:{" "}
-                {discount}%)
-              </p>
-              {/* <h1 className="text-sm font-bold text-gray-700 dark:text-gray-200 md:text-xl">${originalPrice}</h1> */}
-            </div>
-            <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
-              <p className="text-sm leading-8 text-gray-600">{description}</p>
-              <p className="text-sm leading-8 text-gray-600 mt-2">
-                Company: {company}
-              </p>
-            </div>
-           
+          {/* Price Section */}
+          <div className="flex items-center space-x-3">
+            <span className="text-xl font-bold text-gray-800 dark:text-white">
+              ${price}
+            </span>
+            <span className="text-sm text-gray-500 line-through">
+              ${originalPrice}
+            </span>
+            <span className="text-sm text-green-500">{discount}% off</span>
+          </div>
+
+          {/* Packet Info */}
+          {packet && (
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Available in: {packet}
+            </p>
+          )}
+
+          {/* CTA Button */}
+          <div className="mt-6">
+            <button className="w-full px-5 py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">
+              Add to Cart
+            </button>
           </div>
         </div>
       </main>
     </div>
   );
 };
-
 export default DetailsCard;

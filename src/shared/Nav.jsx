@@ -80,7 +80,7 @@ const Nav = ({ onSearch }) => {
           </div>
 
           <h2 className="text-2xl font-bold ">
-            Furni<span className="text-sky-500"> Flex</span>
+            Furni<span className="text-sky-500">Flex</span>
           </h2>
         </div>
 
