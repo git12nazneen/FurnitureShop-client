@@ -1,4 +1,3 @@
-
 import { Autoplay, Navigation, Pagination, Scrollbar } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -16,7 +15,9 @@ const Banner = () => {
   } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch("https://server-zeta-nine-87.vercel.app/products");
+      const res = await fetch(
+        "https://server-zeta-nine-87.vercel.app/products"
+      );
       if (!res.ok) {
         throw new Error("Network response was not ok");
       }
@@ -33,52 +34,14 @@ const Banner = () => {
   }
 
   return (
-    <div className="my-10 mx-5 w-auto md:max-w-4xl lg:max-w-5xl">
-      <h1 className="font-bold text-2xl">OTC Medicine</h1>
-      <div className="relative">
-        <ReactSwiper
-          spaceBetween={50}
-          slidesPerView={3}
-          navigation={{
-            prevEl: ".swiper-button-prev",
-            nextEl: ".swiper-button-next",
-          }}
-          loop={true}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          modules={[Autoplay, Navigation, Pagination, Scrollbar]}
-          breakpoints={{
-            350: {
-              slidesPerView: 1,
-            },
-            768: {
-              slidesPerView: 2,
-            },
-            1024: {
-              slidesPerView: 3,
-            },
-          }}
-        >
-          {products.map((product) => (
-            <SwiperSlide key={product.id}>
-              <Card card={product} />
-            </SwiperSlide>
-          ))}
-        </ReactSwiper>
-        {/* Navigation buttons */}
-        <div className="swiper-button-prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-[#0e7673] text-white p-2 rounded-full cursor-pointer z-10">
-          <FaAngleLeft />
-        </div>
-        <div className="swiper-button-next absolute top-1/2 right-0 transform -translate-y-1/2 bg-[#0e7673] text-white p-2 rounded-full cursor-pointer z-10">
-          <FaAngleRight />
-        </div>
+    <div className="my-10 mx-10 w-auto md:max-w-4xl lg:max-w-5xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {products.map((product) => (
+          <Card key={product.id} card={product} />
+        ))}
       </div>
     </div>
   );
 };
 
 export default Banner;
-
-
