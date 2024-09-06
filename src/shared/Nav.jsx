@@ -108,30 +108,36 @@ const Nav = () => {
           }`}
         >
           <div className="relative mt-4 space-y-4 px-6 py-4">
-            <a
-              className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-              href="#"
-            >
-              Home
-            </a>
-            <a
-              className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-              href="#"
-            >
-              Shop
-            </a>
-            <a
-              className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-              href="#"
-            >
-              Contact
-            </a>
-            <a
-              className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-              href="#"
-            >
-              About
-            </a>
+          <Link to='/'
+            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+            href="#home"
+          >
+            Home
+          </Link>
+          <Link to='/product'
+            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+            href="#shop"
+          >
+            Products
+          </Link>
+          <a
+            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+            href="#contact"
+          >
+           Category
+          </a>
+          <a
+            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+            href="#about"
+          >
+            Customer
+          </a>
+          <a
+            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+            href="#about"
+          >
+            Blog
+          </a>
           </div>
         </div>
 
@@ -139,29 +145,35 @@ const Nav = () => {
 
         {/* <!-- Nav Links --> */}
         <div className="hidden md:flex py-2 space-x-10 px-6  items-center ">
-          <a
+        <Link to='/'
             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
             href="#home"
           >
             Home
-          </a>
-          <a
+          </Link>
+          <Link to='/product'
             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
             href="#shop"
           >
-            Shop
-          </a>
+            Products
+          </Link>
           <a
             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
             href="#contact"
           >
-            Contact
+           Category
           </a>
           <a
             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
             href="#about"
           >
-            About
+            Customer
+          </a>
+          <a
+            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+            href="#about"
+          >
+            Blog
           </a>
         </div>
 

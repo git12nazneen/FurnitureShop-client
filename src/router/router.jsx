@@ -19,6 +19,7 @@ import Card from '../components/commonCard/Card';
 import Payment from '../components/Payment';
 import CheckOutForm from '../components/CheckOutForm ';
 import UpdateProduct from '../dashboard/UpdateProduct';
+import Product from '../pages/Products/Product';
 
 
 const router = createBrowserRouter([
@@ -29,25 +30,28 @@ const router = createBrowserRouter([
       children:[
         {
             path:'/',
-            element:<Home></Home>,
+            element:<Home/>,
         }
         ,{
           path:'/login',
-          element:<Login></Login>
+          element:<Login/>,
         },{
           path:'/register',
-          element:<Register></Register>
+          element:<Register/>
         },
         {
           path:'/products/:id',
-          element:<DetailsCard></DetailsCard>,   
+          element:<DetailsCard/>   
         },
         {
           path:'/products/:id',
-          element:<Card></Card>,
+          element:<Card/>,
           loader:({params})=>fetch(`https://server-zeta-nine-87.vercel.app/products/${params.id}`)
         },
-     
+        {
+          path:'/product',
+          element:<Product/>
+        }
       ]
     },
     {
@@ -56,40 +60,40 @@ const router = createBrowserRouter([
       children:[
         {
           path:'allOrder',
-          element:<Allorder></Allorder>
+          element:<Allorder/>
         },
         {
           path:'addFrom',
-          element:<AddFrom></AddFrom>
+          element:<AddFrom/>
         },
 
         {
           path:'productPage',
-          element:<ProductPage></ProductPage>
+          element:<ProductPage/>
         },
         {
           path:'salesAmount',
-          element:<SalesAmount></SalesAmount>
+          element:<SalesAmount/>
         },
         {
           path:'profile',
-          element:<Profile></Profile>
+          element:<Profile/>
         },
         {
           path:'allUsers',
-          element:<AllUsers></AllUsers>
+          element:<AllUsers/>
         },
         {
           path:'payment',
-          element:<Payment></Payment>
+          element:<Payment/>
         },
         {
           path:'checkoutform',
-          element:<CheckOutForm></CheckOutForm>
+          element:<CheckOutForm/>
         }
         ,{
           path:'updateProduct/:id',
-          element:<UpdateProduct></UpdateProduct>,
+          element:<UpdateProduct/>,
           loader:({params})=>fetch(`https://server-zeta-nine-87.vercel.app/products/${params.id}`)
         }
         ,
