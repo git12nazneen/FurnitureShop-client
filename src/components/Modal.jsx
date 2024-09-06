@@ -254,7 +254,7 @@ const Modal = () => {
                         onClick={handleCheckoutClick}
                         disabled={isCheckoutDisabled}
                         className={`flex w-full items-center justify-center rounded-md border border-transparent ${
-                          isCheckoutDisabled ? "bg-gray-400" : "bg-[#0e7673]"
+                          isCheckoutDisabled ? "bg-gray-400" : "bg-black"
                         } px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700`}
                       >
                         Checkout

@@ -1,7 +1,6 @@
-
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaApple,  FaGoogle} from "react-icons/fa";
+import { FaApple, FaGoogle } from "react-icons/fa";
 import login from "../assets/login.png";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from "../../firebase.config";
@@ -29,10 +28,10 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
-      console.log(loggedUser);
+      // console.log(loggedUser);
 
       toast.success("Successfully registered");
       updateUserProfile(data.name, data.photoURL)
@@ -63,7 +62,7 @@ const Register = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      console.log(user);
+      // console.log(user);
 
       // Handle user registration or login logic here
       toast.success("Successfully signed in with Google");
@@ -87,6 +86,21 @@ const Register = () => {
           </p>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <div>
+              <label className="block text-gray-600">Name</label>
+              <input
+                type="text"
+                {...register("name", { required: "Name is required" })}
+                className={`w-full p-2 mt-1 border rounded ${
+                  errors.name ? "border-red-500" : "border-gray-300"
+                }`}
+                placeholder="Enter your name"
+              />
+              {errors.name && (
+                <span className="text-red-500">{errors.name.message}</span>
+              )}
+            </div>
+
             <div>
               <label className="block text-gray-600">Email address</label>
               <input
@@ -166,18 +180,16 @@ const Register = () => {
             </button>
           </div>
           <div className="text-center mt-4">
-           
-              Already have an account{" "}
-              <Link to="/login">
-                <a
-                  rel="noopener noreferrer"
-                  href="#"
-                  className="underline text-blue-500"
-                >
-                  Login
-                </a>
-              </Link>
-          
+            Already have an account{" "}
+            <Link to="/login">
+              <a
+                rel="noopener noreferrer"
+                href="#"
+                className="underline text-blue-500"
+              >
+                Login
+              </a>
+            </Link>
           </div>
         </div>
 

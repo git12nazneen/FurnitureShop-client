@@ -11,17 +11,17 @@ const DashSidebar = ({ isAdmin }) => {
             {/* Button to toggle sidebar */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed top-4 left-4 p-4 text-white bg-[#0e7673] z-30 md:hidden"
+                className="fixed top-4 left-4 p-4 text-white bg-black z-30 md:hidden"
             >
                 <MdMenu className={`text-2xl ${isOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {/* Sidebar */} 
             <aside
-                className={`fixed top-0 left-0 h-screen bg-[#0e7673] shadow-xl transition-transform duration-300 ease-in-out 
+                className={`fixed top-0 left-0 h-screen bg-black shadow-xl transition-transform duration-300 ease-in-out 
                 ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:w-64 md:static md:h-full`}
             >
-                <div className="p-4 bg-[#0e7673] text-white h-full flex flex-col">
+                <div className="p-4 bg-black text-white h-full flex flex-col">
                     <div className="flex items-center justify-between p-4 md:hidden">
                         <span className="text-lg font-semibold">Menu</span>
                         <button onClick={() => setIsOpen(false)} className="text-2xl">

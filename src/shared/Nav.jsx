@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { AiOutlineShopping } from "react-icons/ai";
 import fImg from "../assets/F.png";
+import userImg from "../assets/pngwing.com.png";
 
 const Nav = () => {
   const { user, logOut } = useAuth();
@@ -108,36 +109,38 @@ const Nav = () => {
           }`}
         >
           <div className="relative mt-4 space-y-4 px-6 py-4">
-          <Link to='/'
-            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-            href="#home"
-          >
-            Home
-          </Link>
-          <Link to='/product'
-            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-            href="#shop"
-          >
-            Products
-          </Link>
-          <a
-            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-            href="#contact"
-          >
-           Category
-          </a>
-          <a
-            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-            href="#about"
-          >
-            Customer
-          </a>
-          <a
-            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-            href="#about"
-          >
-            Blog
-          </a>
+            <Link
+              to="/"
+              className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+              href="#home"
+            >
+              Home
+            </Link>
+            <Link
+              to="/product"
+              className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+              href="#shop"
+            >
+              Products
+            </Link>
+            <a
+              className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+              href="#contact"
+            >
+              Category
+            </a>
+            <a
+              className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+              href="#about"
+            >
+              Customer
+            </a>
+            <a
+              className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+              href="#about"
+            >
+              Blog
+            </a>
           </div>
         </div>
 
@@ -145,13 +148,15 @@ const Nav = () => {
 
         {/* <!-- Nav Links --> */}
         <div className="hidden md:flex py-2 space-x-10 px-6  items-center ">
-        <Link to='/'
+          <Link
+            to="/"
             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
             href="#home"
           >
             Home
           </Link>
-          <Link to='/product'
+          <Link
+            to="/product"
             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
             href="#shop"
           >
@@ -161,7 +166,7 @@ const Nav = () => {
             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
             href="#contact"
           >
-           Category
+            Category
           </a>
           <a
             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
@@ -196,7 +201,7 @@ const Nav = () => {
           {user ? (
             <div className="relative">
               <img
-                src={user.photoURL}
+                src={user.photoURL ? user.photoURL : userImg}
                 alt="User"
                 className="w-10 h-10 rounded-full object-cover cursor-pointer"
                 onClick={toggleMenu}
@@ -219,7 +224,7 @@ const Nav = () => {
               )}
             </div>
           ) : (
-            <div className="px-4 py-2 text-white font-xl bg-[#0e7673] rounded hover:bg-red-600">
+            <div className="px-4 py-2 text-white font-xl bg-black rounded hover:bg-red-600">
               <Link to="/login">Login / SignUp</Link>
             </div>
           )}

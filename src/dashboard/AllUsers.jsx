@@ -77,7 +77,7 @@ const AllUsers = () => {
       <h2 className="text-lg font-medium text-gray-800 dark:text-white">
         Team members
       </h2>
-      <span className="px-3 py-1 text-xs text-white bg-[#0e7673] rounded-full dark:bg-gray-800 dark:text-[#0e7673]">
+      <span className="px-3 py-1 text-xs text-white bg-black rounded-full dark:bg-gray-800 dark:text-[#0e7673]">
         {users.length} users
       </span>
     </div>

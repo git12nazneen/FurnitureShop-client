@@ -58,7 +58,7 @@ const Sidebar = ({ sideCollaps }) => {
                   e.preventDefault(); 
                   link.subLinks && handleClick(idx); 
                 }}
-                className={`hover:bg-[#0e7673] hover:text-white active:text-white rounded-lg p-2 flex items-center gap-2`}
+                className={`hover:bg-black hover:text-white active:text-white rounded-lg p-2 flex items-center gap-2`}
               >
                 <span
                   className={`text-center ${
@@ -84,7 +84,7 @@ const Sidebar = ({ sideCollaps }) => {
                     <li key={subIdx} className="p-2">
                       <a
                         href={subLink.path}
-                        className={`block hover:bg-[#0e7673] hover:text-white active:text-white rounded-lg p-2 flex items-center gap-2`}
+                        className={`block hover:bg-black hover:text-white active:text-white rounded-lg p-2 flex items-center gap-2`}
                       >
                         {subLink.title}
                       </a>

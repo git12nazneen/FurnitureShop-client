@@ -165,7 +165,7 @@ const UpdateProduct = () => {
 
                 <button
                     type="submit"
-                    className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-[#0e7673]"
+                    className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-black"
                 >
                     Save & Continue
                 </button>

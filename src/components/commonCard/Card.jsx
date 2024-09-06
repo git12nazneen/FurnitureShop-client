@@ -15,7 +15,11 @@ const Card = ({ card }) => {
     discount,
     title,
     _id,
-    piece: initialpiece, // Destructure as initialpiece
+    piece: initialpiece,
+    name, // Ensure these fields are available
+    company,
+    capsuleInfo,
+    doses,
   } = card;
 
   const [piece, setpiece] = useState(initialpiece); // Initialize local piece state
@@ -29,7 +33,7 @@ const Card = ({ card }) => {
         const { data } = await axiosSecure.post("/cards", cardsData);
         return data;
       } catch (error) {
-        console.error("Error posting card data:", error);
+        console.error("Error posting card data:", error.response ? error.response.data : error.message);
         throw error;
       }
     },
@@ -41,6 +45,7 @@ const Card = ({ card }) => {
       toast.error("Failed to add product");
     },
   });
+  
   const handleAddToCart = async () => {
     if (piece > 0) {
       try {
@@ -60,6 +65,7 @@ const Card = ({ card }) => {
             originalPrice,
             discount,
             doses,
+            title,
             piece: updatedpiece,
             email: user.email,
             userName: user.displayName,

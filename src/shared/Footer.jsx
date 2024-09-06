@@ -15,7 +15,7 @@ import visa from "../assets/visa.png";
 
 const Footer = () => {
   return (
-    <div className="mx-auto bg-[#0e7673]">
+    <div className="mx-auto bg-black">
       <div className=" py-14 mx-9 text-white font-light justify-center grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 ">
         <div className="space-y-3 lg:pr-10">
           <div className="flex items-center ">

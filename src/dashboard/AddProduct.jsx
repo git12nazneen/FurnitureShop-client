@@ -199,7 +199,7 @@
 //         <button
 //           disabled={loading}
 //           type="submit"
-//           className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-[#0e7673]"
+//           className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-black"
 //         >
 //           {loading ? (
 //             <TbFidgetSpinner className="animate-spin m-auto" />
@@ -427,7 +427,7 @@ const AddProduct = ({ handleSubmit, loading, handleDateChange }) => {
         <button
           disabled={loading}
           type="submit"
-          className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-[#0e7673]"
+          className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-black"
         >
           {loading ? (
             <TbFidgetSpinner className="animate-spin m-auto" />
