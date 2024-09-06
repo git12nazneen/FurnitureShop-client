@@ -1,13 +1,12 @@
-import { Autoplay, Navigation, Pagination, Scrollbar } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar"; // Ensure this import if using Scrollbar
-import { Swiper as ReactSwiper, SwiperSlide } from "swiper/react";
+import { useState } from "react";
 import Card from "./commonCard/Card";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const Banner = () => {
+  const [currentPage, setCurrentPage] = useState(1); // Initialize state for current page
+  const cardsPerPage = 6; // Number of cards per page
+
   const {
     isLoading,
     error,
@@ -33,12 +32,77 @@ const Banner = () => {
     return <div>Error loading products</div>;
   }
 
+  // Logic for pagination
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = products.slice(indexOfFirstCard, indexOfLastCard);
+
+  const totalPages = Math.ceil(products.length / cardsPerPage);
+
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const pageNumbers = [...Array(totalPages).keys()].map((num) => num + 1);
+
   return (
     <div className="my-10 mx-10 w-auto md:max-w-4xl lg:max-w-5xl">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {products.map((product) => (
+        {currentCards.map((product) => (
           <Card key={product.id} card={product} />
         ))}
+      </div>
+
+      {/* Pagination controls */}
+      <div className="my-5 pt-10 flex justify-center items-center mt-5 space-x-2">
+        {/* Previous Button */}
+        <button
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+          className={`px-4 py-2 rounded ${
+            currentPage === 1 ? "bg-gray-300 text-gray-500" : "bg-blue-500 text-white"
+          }`}
+        >
+          <FaAngleLeft />
+        </button>
+
+        {/* Page Number Buttons */}
+        {pageNumbers.map((number) => (
+          <button
+            key={number}
+            onClick={() => handlePageClick(number)}
+            className={`px-4 py-1 rounded ${
+              currentPage === number
+                ? "bg-blue-500 text-white"
+                : "bg-gray-300 text-gray-700"
+            }`}
+          >
+            {number}
+          </button>
+        ))}
+
+        {/* Next Button */}
+        <button
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+          className={`px-4 py-2 rounded ${
+            currentPage === totalPages ? "bg-gray-300 text-gray-500" : "bg-blue-500 text-white"
+          }`}
+        >
+      <FaAngleRight />
+        </button>
       </div>
     </div>
   );
