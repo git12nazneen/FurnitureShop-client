@@ -10,6 +10,8 @@ import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
 import { FaApple } from "react-icons/fa";
 import fImg from "../assets/F.png";
+
+
 const Login = () => {
   const axiosPublic = UseAxiosPublic();
   const { signIn } = useAuth();
