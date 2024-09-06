@@ -1,7 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import logo from "../assets/logo.png";
-import { IoLocationSharp } from "react-icons/io5";
-import { FaBars, FaShoppingCart } from "react-icons/fa";
+import react, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../hooks/AppContext";
 import { Link } from "react-router-dom";
 import Modal from "../components/Modal";
@@ -9,6 +6,8 @@ import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import useCard from "../hooks/useCard";
 import axios from "axios";
+import { AiOutlineShopping } from "react-icons/ai";
+import fImg from "../assets/F.png";
 
 const Nav = ({ onSearch }) => {
   const { user, logOut } = useAuth();
@@ -18,33 +17,45 @@ const Nav = ({ onSearch }) => {
   const { sideCollaps, setSideCollaps } = useContext(AppContext);
   const [cards, setCards] = useState([]);
   const [userCards, setUserCards] = useState([]);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // if user presence img show and clicking toggle
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  // sidebar open close
   const toggleNavbar = () => {
     setSideCollaps(!sideCollaps);
   };
-
+  // modal opening
   const modalShopping = () => {
     setShoppingModal(!shoppingModal);
   };
-
+  // sign out
   const handleSignOut = () => {
     logOut().then().catch();
     toast.success("Logout successful");
   };
-
+  // data fetching
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await axios.get("https://medi-shop-server.vercel.app/cards");
+        const response = await axios.get(
+          "https://medi-shop-server.vercel.app/cards"
+        );
         setCards(response.data);
       } catch (error) {
         console.error("Error fetching cards:", error);
         toast.error("Failed to fetch cards"); // Optional: Display error to the user
       }
     };
-  
+
     fetchCards();
   }, []);
-  
+
+  //
   useEffect(() => {
     if (user) {
       const filteredCards = cards.filter(
@@ -52,146 +63,111 @@ const Nav = ({ onSearch }) => {
           card.email?.toLowerCase().trim() === user.email?.toLowerCase().trim()
       );
       setUserCards(filteredCards);
-      console.log("Filtered cards length for user:", filteredCards.length)
+      console.log("Filtered cards length for user:", filteredCards.length);
     }
   }, [cards, user]);
 
-
   return (
     <nav className="sticky top-0 z-50 bg-white shadow dark:bg-gray-800 ">
-      <div className="container px-6 py-3 mx-auto md:flex">
-        <div className="flex items-center justify-between">
-          <div
-            onClick={toggleNavbar}
-            className="bg-[#0e7673] px-2 py-2 rounded text-white mx-3"
-          >
-            <FaBars />
+      <div className="container px-6 py-3 mx-auto md:flex items-center justify-between">
+        <div className="flex items-center">
+          <div onClick={toggleNavbar} className=" cursor-pointer">
+            <img
+              className="bg-sky-500 px-2 py-2 h-10 rounded-full my-3"
+              src={fImg}
+              alt=""
+            />
           </div>
-          <Link to="/">
-            <img className="w-20 h-10 " src={logo} alt="" />
-          </Link>
-          <span className="font-bold text-red-600 text-3xl">Medicine</span>
-          <div className="flex lg:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              type="button"
-              className="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
-              aria-label="toggle menu"
-            >
-              {!isOpen ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 8h16M4 16h16"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              )}
-            </button>
-          </div>
+
+          <h2 className="text-2xl font-bold ">
+            Furni<span className="text-sky-500"> Flex</span>
+          </h2>
         </div>
 
         <div
           className={`${
-            isOpen
-              ? "translate-x-0 opacity-100 "
-              : "opacity-0 -translate-x-full"
-          } absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 md:mt-0 md:p-0 md:top-0 md:relative md:opacity-100 md:translate-x-0 md:flex md:items-center md:justify-between`}
+            isOpen ? "translate-x-0 opacity-100" : "opacity-0 -translate-x-full"
+          } absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white md:bg-transparent md:opacity-100 md:translate-x-0 md:flex md:items-center md:justify-center`}
         >
-          <div className="relative mt-4 md:mt-0 px-2 md:mx-10 md:py-0">
-            <span className="absolute inset-y-0 right-0 flex bg-[#0e7673] text-white px-7 items-center rounded-r-md">
-              <svg
-                className="w-5 h-5 text-white"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <path
-                  d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-              </svg>
-            </span>
-            <input
-              type="text"
-              className="w-full py-2 pr-40 pl-4 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-#0e7673-400 dark:focus:border-#0e7673-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-#0e7673-300"
-              placeholder="Search Your medicine / ঔষধ ও পণ্য সরচ করুন"
-              onChange={(e) => onSearch(e.target.value)}
-            />
+          <div className="relative mt-4 md:mt-0 space-x-10 md:mx-10 md:py-0 flex justify-center items-center">
+            <a
+              className="my-2 text-gray-700 transition-colors duration-300 transform hover:text-blue-500 md:mx-4 md:my-0"
+              href="#"
+            >
+              Home
+            </a>
+            <a
+              className="my-2 text-gray-700 transition-colors duration-300 transform hover:text-blue-500 md:mx-4 md:my-0"
+              href="#"
+            >
+              Shop
+            </a>
+            <a
+              className="my-2 text-gray-700 transition-colors duration-300 transform hover:text-blue-500 md:mx-4 md:my-0"
+              href="#"
+            >
+              Contact
+            </a>
+            <a
+              className="my-2 text-gray-700 transition-colors duration-300 transform hover:text-blue-500 md:mx-4 md:my-0"
+              href="#"
+            >
+              About
+            </a>
           </div>
+        </div>
 
-          <div className="flex flex-row px-2 -mx-4 md:flex-row md:mx-10 md:py-0 my-3 lg:my-0">
-            <div className="px-4 py-2 flex items-center text-center ">
-              <span className="text-red-600 px-2 text-2xl">
-                <IoLocationSharp />
-              </span>
-              <h1>Sirajgonj</h1>
+        <div className="flex items-center gap-2">
+          <div className="relative">
+            <div
+              onClick={modalShopping}
+              className="rounded-full text-3xl items-center mx-3 cursor-pointer"
+            >
+              <AiOutlineShopping />
             </div>
-
-            <div>
-              <div
-                onClick={modalShopping}
-                className="bg-[#0e7673] rounded-full p-3 text-white items-center mx-3 relative"
-              >
-                <FaShoppingCart />
-              </div>
-              <div className="absolute top-0 px-2 bg-red-700 rounded-full ">
-              <p className="text-white">{userCards.length}</p>
-              </div>
+            <div className="absolute -bottom-0 -right-0 bg-black rounded-full w-5 h-5 flex items-center justify-center">
+              <p className="text-white text-xs">{userCards.length}</p>
             </div>
           </div>
-          <div className="flex flex-col cursor-pointer">
+
+          {/* User Presence and Absence */}
+          <div>
             {user ? (
-              <div className="flex gap-3">
-                <div
-                  onClick={handleSignOut}
-                  className="px-4 py-3 bg-[#0e7673] rounded-sm text-white hover:text-black hover:bg-neutral-300 transition font-semibold cursor-pointer"
-                >
-                  Logout
-                </div>
-                <Link
-                  to="/dashboard/profile"
-                  className="px-4 py-3 bg-[#0e7673] rounded-sm text-white hover:text-black hover:bg-neutral-300 transition font-semibold"
-                >
-                  Dashboard
-                </Link>
+              <div className="relative">
+                <img
+                  src={user.photoURL} // Assuming you have the user photoURL
+                  alt="User"
+                  className="w-10 h-10 rounded-full object-cover cursor-pointer"
+                  onClick={toggleMenu}
+                />
+                {/* Dropdown Menu */}
+                {menuOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                    <div
+                      onClick={handleSignOut}
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer font-semibold"
+                    >
+                      Logout
+                    </div>
+                    <Link
+                      to="/dashboard/profile"
+                      className="block px-4 py-2 hover:bg-gray-100 font-semibold"
+                      onClick={() => setMenuOpen(false)} // Close the menu when clicked
+                    >
+                      Dashboard
+                    </Link>
+                  </div>
+                )}
               </div>
             ) : (
-              <>
-                <div
-                  className="px-4 py-2 text-white font-xl transition-colors duration-300 transform rounded dark:text-gray-200 bg-[#0e7673] hover:bg-red-600 dark:hover:bg-gray-700 md:mx-2"
-                >
-                  <Link to="/login"> Login / SignUp</Link>
-                </div>
-              </>
+              <div className="px-4 py-2 text-white font-xl transition-colors duration-300 transform rounded bg-[#0e7673] hover:bg-red-600 md:mx-2">
+                <Link to="/login">Login / SignUp</Link>
+              </div>
             )}
           </div>
         </div>
       </div>
+
       {shoppingModal && <Modal />}
     </nav>
   );
