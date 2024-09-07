@@ -8,7 +8,7 @@ const Banner = ({ selectedCategory }) => {
   const cardsPerPage = 6;
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const { isLoading, error, data: products } = useQuery({
+  const { isLoading, error, data: products ,refetch} = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch("https://server-zeta-nine-87.vercel.app/products");
@@ -69,7 +69,7 @@ const Banner = ({ selectedCategory }) => {
     <div className="my-10 mx-10 w-auto md:max-w-4xl lg:max-w-5xl">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {currentCards.map((product) => (
-          <Card key={product.id} card={product} />
+          <Card key={product.id} card={product} refetch={refetch}/>
         ))}
       </div>
 

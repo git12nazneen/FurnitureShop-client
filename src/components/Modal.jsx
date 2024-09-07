@@ -7,8 +7,13 @@ import {
 } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import useAuth from "../hooks/useAuth";
-import axios from "axios";
 import Payment from "./Payment";
+import Swal from "sweetalert2";
+import UseAxiosPublic from "../hooks/UseAxiosPublice";
+import { useQuery, } from "@tanstack/react-query";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+
+
 
 // Details Dialog Component
 const ProductDetailsDialog = ({ product, isOpen, onClose }) => {
@@ -48,10 +53,11 @@ const ProductDetailsDialog = ({ product, isOpen, onClose }) => {
                 </h3>
                 <p className="ml-4">${product.price}</p>
               </div>
-          
-              <p className="mt-1 text-sm text-gray-500">Discount {product.discount}</p>
+
+              <p className="mt-1 text-sm text-gray-500">
+                Discount {product.discount}
+              </p>
             </div>
-            
           </div>
         </Dialog.Panel>
       </div>
@@ -67,23 +73,35 @@ const Modal = () => {
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [cards, setCards] = useState([]);
+  // const [cards, setCards] = useState([]);
   const [userCards, setUserCards] = useState([]);
   const [isCheckoutDisabled, setIsCheckoutDisabled] = useState(false);
   const { user } = useAuth();
+  const axiosPublic = UseAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
-  useEffect(() => {
-    const fetchCards = async () => {
-      try {
-        const response = await axios.get("https://server-zeta-nine-87.vercel.app/cards");
-        setCards(response.data);
-      } catch (error) {
-        console.error("Error fetching cards:", error);
-      }
-    };
+  // get card
+  // useEffect(() => {
+  //   const fetchCards = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "https://server-zeta-nine-87.vercel.app/cards"
+  //       );
+  //       setCards(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching cards:", error);
+  //     }
+  //   };
 
-    fetchCards();
-  }, []);
+  //   fetchCards();
+  // }, []);
+  const { data: cards = [], refetch } = useQuery({
+    queryKey: ["cards"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/cards");
+      return res.data;
+    },
+  });
 
   useEffect(() => {
     if (user) {
@@ -96,6 +114,7 @@ const Modal = () => {
     }
   }, [cards, user]);
 
+  // total count
   const subtotalPrice = userCards.reduce(
     (total, item) => total + (parseFloat(item.price) || 0),
     0
@@ -109,10 +128,9 @@ const Modal = () => {
   }, 0);
 
   const totalPrice = subtotalPrice - totalDiscount;
-  // const resetCart = () => {
-  //   setUserCards([]);
-  // };
 
+
+  // checkout function
   const handleCheckoutClick = () => {
     if (userCards.length > 0) {
       setIsCheckoutDisabled(true);
@@ -121,17 +139,53 @@ const Modal = () => {
       setSelectedProduct([]);
     }
   };
-
+  // details dialogue page
   const openDetailsDialog = (product) => {
     setSelectedProduct(product);
     setIsDetailsDialogOpen(true);
   };
-
+  // dialogue close
   const closeDetailsDialog = () => {
     setIsDetailsDialogOpen(false);
     setSelectedProduct(null);
   };
-
+  // handle delete
+  const handleDelete = (product) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosPublic
+          .delete(`/cards/${product._id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              console.log('Refetching data...');
+            refetch();  // Ensure refetch is actually called
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting product:", error);
+            Swal.fire({
+              title: "Error!",
+              text: "Failed to delete the product.",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
+  
   return (
     <>
       <Dialog
@@ -195,17 +249,17 @@ const Modal = () => {
                                     </h3>
                                     <p className="ml-4">${product.price}</p>
                                   </div>
-                                 
-                                 
                                 </div>
                                 <div className="flex flex-1 items-end justify-between text-sm">
-                                <p className="mt-1 text-sm text-gray-500">
-                                  Discount  {product.discount}
+                                  <p className="mt-1 text-sm text-gray-500">
+                                    Discount {product.discount}
                                   </p>
                                   <div className="flex">
                                     <button
                                       type="button"
                                       className="font-medium text-[#0e7673] hover:text-indigo-500"
+                                      onClick={() => handleDelete(product)}
+                                      // Pass the product ID to handleDelete
                                     >
                                       Remove
                                     </button>

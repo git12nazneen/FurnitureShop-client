@@ -5,7 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
-const Card = ({ card }) => {
+const Card = ({ card, refetch }) => {
   const { user } = useAuth();
   const {
     image,
@@ -40,6 +40,7 @@ const Card = ({ card }) => {
     onSuccess: () => {
       toast.success("Added Product Successfully!");
       setIsAddedToCart(true);
+      refetch()
     },
     onError: () => {
       toast.error("Failed to add product");
@@ -72,6 +73,7 @@ const Card = ({ card }) => {
           };
 
           await mutateAsync(cardsData);
+          refetch();
         } else {
           toast.error("Product is now out of stock");
         }
@@ -101,14 +103,14 @@ const Card = ({ card }) => {
       <div className="px-6 py-2 group-hover:text-white">
         <div className="flex gap-7 py-3">
           <h2 className="text-sm font-bold group-hover:text-white  ">
-           Price ${price}
+         ${price}
           </h2>
           <h2 className="text-sm font-bold text-gray-500 group-hover:text-white line-through">
             ${originalPrice}
           </h2>
 
           <h2 className="text-sm font-bold group-hover:text-white text-red-600">
-          Discount  {discount}
+           {discount}
           </h2>
         </div>
         <h1 className="text-[#60a87e] mb-4  group-hover:text-white">

@@ -1,8 +1,57 @@
-# React + Vite
+# FurniFlex (E-commerce WebApp)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Objective
 
-Currently, two official plugins are available:
+Develop core functionalities for an E-commerce WebApp using React, Context API, Tailwind CSS, and Firebase Authentication, with a backend built on Node.js, Express, and MongoDB.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Demo
+
+Check out the live demo of the E-commerce WebApp [here](furniture-shop-48a7b.web.app).
+
+## Features
+
+### User Authentication
+- **Goal:** Implement sign-up and login.
+- **Tech:** Firebase Authentication, Context API.
+- **Details:** Session-based login management.
+
+### Product Listing
+- **Goal:** Display product data.
+- **Tech:** Fetch from JSON/API, manage state with Context API.
+- **Details:** Styled with Tailwind CSS.
+
+### Shopping Cart
+- **Goal:** Manage cart items.
+- **Tech:** Context API.
+- **Details:** Add/remove items, real-time updates, Tailwind CSS styling.
+
+### Cart Management
+- **Goal:** Adjust cart quantities and item removal.
+- **Tech:** Context API.
+- **Details:** Real-time updates, styled with Tailwind CSS.
+
+### Dashboard
+- **Goal:** User profile and order history management.
+- **Tech:** Integrated with authentication.
+- **Details:** Secure access, responsive design with Tailwind CSS.
+
+### Checkout (Optional)
+- **Goal:** Prepare for a cash-on-delivery checkout process.
+
+## Tech Stack
+
+- **Frontend:** React, Tailwind CSS, Context API, Firebase Authentication
+- **Backend:** Node.js, Express.js, MongoDB
+- **Data:** Local JSON or API
+
+## Setup
+
+1. **Clone the Repo:**
+   ```bash
+   git clone <repository-url>
+
+2. **Install Dependency:**
+    ``npm install
+    
+3. **Start Development Server:**
+ ``npm start

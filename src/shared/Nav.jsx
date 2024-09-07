@@ -8,15 +8,18 @@ import axios from "axios";
 import { AiOutlineShopping } from "react-icons/ai";
 import fImg from "../assets/F.png";
 import userImg from "../assets/pngwing.com.png";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Nav = () => {
   const { user, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [shoppingModal, setShoppingModal] = useState(false);
   const { sideCollaps, setSideCollaps } = useContext(AppContext);
-  const [cards, setCards] = useState([]);
+  // const [cards, setCards] = useState([]);
   const [userCards, setUserCards] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
+  const axiosSecure = useAxiosSecure();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -35,19 +38,15 @@ const Nav = () => {
     toast.success("Logout successful");
   };
 
-  useEffect(() => {
-    const fetchCards = async () => {
-      try {
-        const response = await axios.get(
-          "https://server-zeta-nine-87.vercel.app/cards"
-        );
-        setCards(response.data);
-      } catch (error) {
-        toast.error("Failed to fetch cards");
-      }
-    };
-    fetchCards();
-  }, []);
+
+  const { data: cards = [], refetch } = useQuery({
+    queryKey: ["cards"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/cards");
+      return res.data;
+    },
+  });
+
 
   useEffect(() => {
     if (user) {
