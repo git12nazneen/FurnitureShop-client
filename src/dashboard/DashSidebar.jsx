@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { MdMenu } from 'react-icons/md';
 import { LuChevronLeft } from 'react-icons/lu';
@@ -18,7 +18,7 @@ const DashSidebar = ({ isAdmin }) => {
 
             {/* Sidebar */} 
             <aside
-                className={`fixed top-0 left-0 h-screen bg-black shadow-xl transition-transform duration-300 ease-in-out 
+                className={`fixed top-0 left-0 max-h-screen bg-black shadow-xl transition-transform duration-300 ease-in-out 
                 ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:w-64 md:static md:h-full`}
             >
                 <div className="p-4 bg-black text-white h-full flex flex-col">

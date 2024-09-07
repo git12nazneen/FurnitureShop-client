@@ -35,7 +35,7 @@ const Sidebar = ({ sideCollaps }) => {
   };
 
   return (
-    <aside className={`shadow-xl  h-screen ${sideCollaps ? "w-64" : "w-16"}`}>
+    <aside className={`shadow-xl max-h-min ${sideCollaps ? "w-64" : "w-16"}`}>
       <div className="p-2 bg-white text-black">
         <div
           className={`${
@@ -45,7 +45,7 @@ const Sidebar = ({ sideCollaps }) => {
           }`}
         >
           <div className="rounded-full bg-black p-4 text-center">
-            <RiStickyNote2Line className="w-full" />
+            <RiStickyNote2Line className="w-full text-white" />
           </div>
           <h2 className="text-xl font-semibold">Favorite</h2>
         </div>

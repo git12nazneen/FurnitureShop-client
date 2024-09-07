@@ -2,41 +2,35 @@ import { useState } from "react";
 import { FaChair } from "react-icons/fa";
 import { MdChair } from "react-icons/md";
 import { PiOfficeChairBold } from "react-icons/pi";
-
 import { RiStickyNote2Line } from "react-icons/ri";
+import { Tabs, Tab, TabList } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 
-
-const Sidebar = ({ sideCollaps }) => {
+// Sidebar component with collapsible feature and category filtering using tabs
+const Sidebar = ({ sideCollaps, setCategory }) => {
   const [openIndex, setOpenIndex] = useState(null);
 
+  // List of links and their icons
   const links = [
-    {
-      title: "Rocking Chair",
-      path: "/",
-      icon: <PiOfficeChairBold />,
-      
-    },
-    {
-      title: "Side Chair",
-      path: "/",
-      icon: <FaChair />,
-    
-    },
-    {
-      title: "Lounge Chair",
-      path: "/",
-      icon: <MdChair />,
-     
-    },
+    { title: "Rocking Chair", icon: <PiOfficeChairBold /> },
+    { title: "Side Chair", icon: <FaChair /> },
+    { title: "Lounge Chair", icon: <MdChair /> },
   ];
 
+  // Handle tab selection
+  const handleTabSelect = (index) => {
+    const categories = ["Rocking", "Side", "Lounge"];
+    setCategory(categories[index]);
+  };
+
+  // Handle sidebar item click
   const handleClick = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <aside className={`shadow-xl max-h-min ${sideCollaps ? "w-64" : "w-16"}`}>
-      <div className="p-2 bg-white text-black">
+    <aside className={`shadow-xl  ${sideCollaps ? "w-64" : "w-16"}`}>
+      <div className="p-2 bg-white max-h-screen text-black">
         <div
           className={`${
             sideCollaps
@@ -50,39 +44,23 @@ const Sidebar = ({ sideCollaps }) => {
           <h2 className="text-xl font-semibold">Favorite</h2>
         </div>
       </div>
-      <nav className="mt-3 bg-sky-200 mx-2">
-        <ul>
+      <Tabs onSelect={handleTabSelect} >
+        <TabList className="flex flex-col p-4 overflow-y-auto">
           {links.map((link, idx) => (
-            <li key={idx} className="p-2">
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault(); 
-                  link.subLinks && handleClick(idx); 
-                }}
-                className={`hover:bg-black hover:text-white active:text-white rounded-lg p-2 flex items-center gap-2`}
-              >
-                <span
-                  className={`text-center ${
-                    sideCollaps ? "text-xl" : "text-xl md:text-2xl"
-                  }`}
-                >
-                  {link.icon}
-                </span>
-                <span
-                  className={`font-semibold ${
-                    sideCollaps ? "hidden md:block" : "hidden"
-                  }`}
-                >
-                  {link.title}
-                </span>
-                
-              </a>
-             
-            </li>
+            <Tab
+              key={idx}
+              className="flex items-center gap-2 p-2 cursor-pointer"
+              onClick={() => handleClick(idx)}
+            >
+              {link.icon}
+              <span className={`font-semibold ${sideCollaps ? "block" : "hidden md:block"}`}>
+                {link.title}
+              </span>
+            </Tab>
           ))}
-        </ul>
-      </nav>
+        </TabList>
+      </Tabs>
+    
     </aside>
   );
 };

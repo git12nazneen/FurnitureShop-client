@@ -10,7 +10,6 @@ import Allorder from '../dashboard/Allorder';
 import ProductPage from '../dashboard/ProductPage';
 import SalesAmount from '../dashboard/SalesAmount';
 import Profile from '../dashboard/Profile';
-import { FcPrivacy } from 'react-icons/fc';
 import PrivateRoute from '../provider/PrivateRoute';
 import AllUsers from '../dashboard/AllUsers';
 import AddFrom from '../dashboard/AddFrom';

@@ -1,18 +1,16 @@
-
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Banner from '../../components/Banner';
 import { AppContext } from '../../hooks/AppContext';
-import { useOutletContext } from 'react-router-dom';
 
 const Home = () => {
     const { sideCollaps } = useContext(AppContext);
-    const [searchQuery] = useOutletContext();
+    const [selectedCategory, setSelectedCategory] = useState("");
 
     return (
         <div className='flex'>
-            <Sidebar sideCollaps={sideCollaps} />
-            <Banner searchQuery={searchQuery} />
+            <Sidebar setCategory={setSelectedCategory} sideCollaps={sideCollaps} />
+            <Banner selectedCategory={selectedCategory} />
         </div>
     );
 };
