@@ -1,67 +1,41 @@
-  // useEffect(() => {
-  //   const fetchCards = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         "https://server-zeta-nine-87.vercel.app/cards"
-  //       );
-  //       setCards(response.data);
-  //     } catch (error) {
-  //       toast.error("Failed to fetch cards");
-  //     }
-  //   };
-  //   fetchCards();
-  // }, []);
 
-
-  // import React, { useContext, useEffect, useState } from "react";
-// import { AppContext } from "../hooks/AppContext";
+// import axios from "axios";
+// import { useEffect, useState } from "react";
+// import useAuth from "../../hooks/useAuth";
+// import { XMarkIcon } from "@heroicons/react/24/outline";
 // import { Link } from "react-router-dom";
-// import Modal from "../components/Modal";
-// import useAuth from "../hooks/useAuth";
-// import toast from "react-hot-toast";
-// import { AiOutlineShopping } from "react-icons/ai";
-// import fImg from "../assets/F.png";
-// import userImg from "../assets/pngwing.com.png";
-// import { useQuery } from "@tanstack/react-query";
-// import useAxiosSecure from "../hooks/useAxiosSecure";
+// import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react"; // Import these components
+// import Payment from "../../components/Payment";
+// import UseAxiosPublic from "../../hooks/UseAxiosPublice";
+// import Swal from "sweetalert2";
 
-// const Nav = () => {
-//   const { user, logOut } = useAuth();
-//   const [isOpen, setIsOpen] = useState(false);
-//   const [shoppingModal, setShoppingModal] = useState(false);
-//   const { sideCollaps, setSideCollaps } = useContext(AppContext);
-//   // const [cards, setCards] = useState([]);
+// const Product = () => {
+//   const [cards, setCards] = useState([]);
 //   const [userCards, setUserCards] = useState([]);
-//   const [menuOpen, setMenuOpen] = useState(false);
-//   const axiosSecure = useAxiosSecure();
+//   const [isCheckoutDisabled, setIsCheckoutDisabled] = useState(false);
+//   const [open, setOpen] = useState(true);
+//   const [isPaymentOpen, setIsPaymentOpen] = useState(false); // State to manage modal visibility
+//   const { user } = useAuth();
+//   const axiosPublic = UseAxiosPublic();
 
-//   const toggleMenu = () => {
-//     setMenuOpen(!menuOpen);
-//   };
+//   // Fetch data from the server
+//   useEffect(() => {
+//     const fetchCards = async () => {
+//       try {
+//         const response = await axios.get(
+//           "https://server-zeta-nine-87.vercel.app/cards"
+//         );
+//         setCards(response.data);
+//         console.log(response.data);
+//       } catch (error) {
+//         console.error("Error fetching cards:", error);
+//       }
+//     };
 
-//   const toggleNavbar = () => {
-//     setSideCollaps(!sideCollaps);
-//   };
+//     fetchCards();
+//   }, []);
 
-//   const modalShopping = () => {
-//     setShoppingModal(!shoppingModal);
-//   };
-
-//   const handleSignOut = () => {
-//     logOut().then().catch();
-//     toast.success("Logout successful");
-//   };
-
-
-//   const { data: cards = [], refetch } = useQuery({
-//     queryKey: ["cards"],
-//     queryFn: async () => {
-//       const res = await axiosSecure.get("/cards");
-//       return res.data;
-//     },
-//   });
-
-
+//   // Filter user-specific cards and manage checkout button state
 //   useEffect(() => {
 //     if (user) {
 //       const filteredCards = cards.filter(
@@ -69,185 +43,231 @@
 //           card.email?.toLowerCase().trim() === user.email?.toLowerCase().trim()
 //       );
 //       setUserCards(filteredCards);
+//       setIsCheckoutDisabled(filteredCards.length === 0);
 //     }
 //   }, [cards, user]);
 
+//   // Calculate total values
+//   const subtotalPrice = userCards.reduce(
+//     (total, item) => total + (parseFloat(item.price) || 0),
+//     0
+//   );
+
+//   const totalDiscount = userCards.reduce((total, item) => {
+//     const price = parseFloat(item.price) || 0;
+//     const discountPercentage = parseFloat(item.discount) || 0;
+//     const discountAmount = price * (discountPercentage / 100);
+//     return total + discountAmount;
+//   }, 0);
+
+//   const totalPrice = subtotalPrice - totalDiscount;
+
+//   // Handle checkout button click
+//   const handleCheckoutClick = () => {
+//     if (userCards.length > 0) {
+//       setIsPaymentOpen(true); // Open the dialog
+//     }
+//   };
+
+//   // Close button handler
+//   const onClose = () => {
+//     setOpen(false);
+//   };
+// // handle delete
+// const handleDelete = (product) => {
+//   Swal.fire({
+//     title: "Are you sure?",
+//     text: "You won't be able to revert this!",
+//     icon: "warning",
+//     showCancelButton: true,
+//     confirmButtonColor: "#3085d6",
+//     cancelButtonColor: "#d33",
+//     confirmButtonText: "Yes, delete it!",
+//   }).then((result) => {
+//     if (result.isConfirmed) {
+//       axiosPublic
+//         .delete(`/cards/${product._id}`)
+//         .then((res) => {
+//           console.log("Delete response:", res.data); // Log the response
+
+//           if (res.data.deletedCount > 0) {
+//             // Update the UI state by removing the deleted product
+//             setUserCards((prevUserCards) => {
+//               const updatedCards = prevUserCards.filter((card) => card._id !== product._id);
+//               console.log("Updated userCards:", updatedCards); // Log the updated state
+//               return updatedCards;
+//             });
+
+//             Swal.fire({
+//               title: "Deleted!",
+//               text: "Your file has been deleted.",
+//               icon: "success",
+//             });
+//           }
+//         })
+//         .catch((error) => {
+//           console.error("Error deleting product:", error);
+//           Swal.fire({
+//             title: "Error!",
+//             text: "Failed to delete the product.",
+//             icon: "error",
+//           });
+//         });
+//     }
+//   });
+// };
+
+
 //   return (
-//     <nav className="sticky top-0 z-50 bg-white shadow dark:bg-gray-800">
-//       <div className="container px-6 py-3 mx-auto flex items-center justify-between">
-//         {/* Logo Section */}
-//         <div className="flex items-center">
-//           <div onClick={toggleNavbar} className="cursor-pointer">
-//             <img
-//               className="bg-sky-500 px-2 py-2 h-10 rounded-full"
-//               src={fImg}
-//               alt="Logo"
-//             />
-//           </div>
-
-//           <h2 className="text-2xl font-bold ml-2">
-//             Furni<span className="text-sky-500">Flex</span>
-//           </h2>
-//         </div>
-
-//         {/* Hamburger Icon for Small Screens */}
-//         <div className="block md:hidden">
-//           <button
-//             onClick={() => setIsOpen(!isOpen)}
-//             className="text-gray-700 focus:outline-none"
-//           >
-//             <svg
-//               className="w-6 h-6"
-//               fill="none"
-//               stroke="currentColor"
-//               viewBox="0 0 24 24"
-//               xmlns="http://www.w3.org/2000/svg"
-//             >
-//               <path
-//                 strokeLinecap="round"
-//                 strokeLinejoin="round"
-//                 strokeWidth="2"
-//                 d="M4 6h16M4 12h16m-7 6h7"
-//               ></path>
-//             </svg>
-//           </button>
-//         </div>
-
-//         {/* Nav Links - Toggle for Small Screens */}
-//         <div
-//           className={`${
-//             isOpen ? "block" : "hidden"
-//           } absolute inset-x-0 top-16 bg-white shadow-lg md:hidden transition-transform duration-300 ease-in-out transform ${
-//             isOpen ? "translate-y-0" : "translate-y-[-100%]"
-//           }`}
-//         >
-//           <div className="relative mt-4 space-y-4 px-6 py-4">
-//             <Link
-//               to="/"
-//               className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-//               href="#home"
-//             >
-//               Home
-//             </Link>
-//             <Link
-//               to="/product"
-//               className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-//               href="#shop"
-//             >
-//               Products
-//             </Link>
-//             <a
-//               className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-//               href="#contact"
-//             >
-//               Category
-//             </a>
-//             <a
-//               className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-//               href="#about"
-//             >
-//               Customer
-//             </a>
-//             <a
-//               className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-//               href="#about"
-//             >
-//               Blog
-//             </a>
-//           </div>
-//         </div>
-
-//         {/* landascape menu */}
-
-//         {/* <!-- Nav Links --> */}
-//         <div className="hidden md:flex py-2 space-x-10 px-6  items-center ">
-//           <Link
-//             to="/"
-//             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-//             href="#home"
-//           >
-//             Home
-//           </Link>
-//           <Link
-//             to="/product"
-//             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-//             href="#shop"
-//           >
-//             Products
-//           </Link>
-//           <a
-//             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-//             href="#contact"
-//           >
-//             Category
-//           </a>
-//           <a
-//             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-//             href="#about"
-//           >
-//             Customer
-//           </a>
-//           <a
-//             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-//             href="#about"
-//           >
-//             Blog
-//           </a>
-//         </div>
-
-//         {/* Cart and User Section */}
-//         <div className="flex items-center gap-2">
-//           {/* Shopping Cart */}
-//           <div className="relative">
-//             <button
-//               onClick={modalShopping}
-//               className="rounded-full text-3xl mx-3"
-//             >
-//               <AiOutlineShopping />
-//             </button>
-//             <div className="absolute -bottom-0 -right-0 bg-black rounded-full w-5 h-5 flex items-center justify-center z-20">
-//               <p className="text-white text-xs">{userCards.length}</p>
-//             </div>
-//           </div>
-
-//           {/* User Presence */}
-//           {user ? (
-//             <div className="relative">
-//               <img
-//                 src={user.photoURL ? user.photoURL : userImg}
-//                 alt="User"
-//                 className="w-10 h-10 rounded-full object-cover cursor-pointer"
-//                 onClick={toggleMenu}
-//               />
-//               {menuOpen && (
-//                 <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-//                   <div
-//                     onClick={handleSignOut}
-//                     className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-//                   >
-//                     Logout
-//                   </div>
-//                   <Link
-//                     to="/dashboard/profile"
-//                     className="block px-4 py-2 hover:bg-gray-100"
-//                   >
-//                     Dashboard
-//                   </Link>
-//                 </div>
-//               )}
+//     <div className="max-w-6xl mx-auto">
+//       <h1 className="text-3xl font-bold my-10">An Overview of your order list</h1>
+//       <div className="flex flex-col lg:flex-row gap-14">
+//         {/* Product Section */}
+//         <div className="w-full lg:w-2/3 mb-10">
+//           {userCards.length === 0 ? (
+//             <div className="text-center py-10">
+//               <p className="text-xl font-medium text-gray-500">No products added</p>
 //             </div>
 //           ) : (
-//             <div className="px-2 lg:px-4 py-1 lg:py-2 text-white font-xl bg-black rounded hover:bg-red-600">
-//               <Link to="/login">Login / SignUp</Link>
+//             <div className="flow-root">
+//               <ul
+//                 role="list"
+//                 className="-my-6 divide-y divide-gray-200 bg-gray-100 border p-10 rounded-lg"
+//               >
+//                 {userCards.map((product) => (
+//                   <li
+//                     key={product._id}
+//                     className="flex py-6 cursor-pointer"
+//                   >
+//                     <button
+//                       type="button"
+//                       className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200"
+//                     >
+//                       <img
+//                         src={product.image}
+//                         className="h-full w-full object-cover object-center"
+//                         alt={product.name}
+//                       />
+//                     </button>
+//                     <div className="ml-4 flex flex-1 flex-col">
+//                       <div>
+//                         <div className="flex justify-between text-base font-medium text-gray-900">
+//                           <h3>{product.title}</h3>
+//                           <p className="ml-4">${product.price}</p>
+//                         </div>
+//                         <p className="mt-1 text-sm text-gray-500">
+//                           Price: $ {product.originalPrice}
+//                         </p>
+//                       </div>
+//                       <div className="flex flex-1 items-end justify-between text-sm">
+//                         <p className="mt-1 text-sm text-gray-500">
+//                           Discount {product.discount}
+//                         </p>
+//                         <div className="flex">
+//                         <button
+//   type="button"
+//   className="font-medium text-[#0e7673] hover:text-indigo-500"
+//   onClick={() => handleDelete(product)}
+//    // Pass the product ID to handleDelete
+// >
+//   Remove
+// </button>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </li>
+//                 ))}
+//               </ul>
 //             </div>
 //           )}
 //         </div>
+//         {/* Checkout Section */}
+//         <div className="w-full lg:w-1/3 mb-10">
+//           <h1 className="text-3xl font-bold">Order Details</h1>
+//           <div className="mt-4 bg-gray-100 border rounded-lg">
+//             <div className="border-t space-y-2 border-gray-200 px-4 py-6 sm:px-6">
+//               <div className="flex justify-between text-base font-medium text-gray-900">
+//                 <p>Total</p>
+//                 <p>${subtotalPrice.toFixed(2)}</p>
+//               </div>
+//               <div className="flex justify-between text-base font-medium text-gray-900">
+//                 <p>Discount</p>
+//                 <p>${totalDiscount.toFixed(2)}</p>
+//               </div>
+//               <div className="flex justify-between text-base font-medium text-gray-900">
+//                 <p>Subtotal</p>
+//                 <p>${totalPrice.toFixed(2)}</p>
+//               </div>
+//               <p className="mt-0.5 text-sm text-gray-500">
+//                 Shipping and taxes calculated at checkout.
+//               </p>
+//               <div className="mt-6">
+//                 <button
+//                   onClick={handleCheckoutClick}
+//                   disabled={isCheckoutDisabled}
+//                   className={`flex w-full items-center justify-center rounded-md border border-transparent ${
+//                     isCheckoutDisabled ? "bg-gray-400" : "bg-black"
+//                   } px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700`}
+//                 >
+//                   Checkout
+//                 </button>
+//               </div>
+//               <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+//                 <p>
+//                   or{" "}
+//                   <Link to='/'
+//                     type="button"
+//                     className="font-medium text-[#0e7673] hover:text-indigo-500"
+//                   >
+//                     Continue Shopping
+//                     <span aria-hidden="true"> &rarr;</span>
+//                   </Link>
+//                 </p>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
 //       </div>
 
-//       {/* Modal */}
-//       {shoppingModal && <Modal />}
-//     </nav>
+//       {/* Payment Dialog */}
+//       <Dialog
+//         open={isPaymentOpen}
+//         onClose={() => setIsPaymentOpen(false)}
+//         className="relative z-10"
+//       >
+//         <DialogBackdrop className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-500 ease-in-out" />
+//         <div className="fixed inset-0 overflow-hidden flex items-center justify-center">
+//           <DialogPanel className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out bg-white shadow-xl">
+//             <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+//               <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+//                 <div className="flex items-start justify-between">
+//                   <DialogTitle className="text-lg font-medium text-gray-900">
+//                     Payment
+//                   </DialogTitle>
+//                   <div className="ml-3 flex h-7 items-center">
+//                     <button
+//                       type="button"
+//                       onClick={() => setIsPaymentOpen(false)}
+//                       className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
+//                     >
+//                       <span className="absolute -inset-0.5" />
+//                       <span className="sr-only">Close panel</span>
+//                       <XMarkIcon aria-hidden="true" className="h-6 w-6" />
+//                     </button>
+//                   </div>
+//                 </div>
+//                 <Payment
+//                   onPaymentSelect={(method) =>
+//                     console.log("Selected payment method:", method)
+//                   }
+//                 />
+//               </div>
+//             </div>
+//           </DialogPanel>
+//         </div>
+//       </Dialog>
+//     </div>
 //   );
 // };
 
-// export default Nav;
+// export default Product;

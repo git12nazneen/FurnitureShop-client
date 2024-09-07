@@ -2,9 +2,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react"; // Import these components
+import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import Payment from "../../components/Payment";
 import UseAxiosPublic from "../../hooks/UseAxiosPublice";
 import Swal from "sweetalert2";
@@ -14,7 +13,7 @@ const Product = () => {
   const [userCards, setUserCards] = useState([]);
   const [isCheckoutDisabled, setIsCheckoutDisabled] = useState(false);
   const [open, setOpen] = useState(true);
-  const [isPaymentOpen, setIsPaymentOpen] = useState(false); // State to manage modal visibility
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const { user } = useAuth();
   const axiosPublic = UseAxiosPublic();
 
@@ -22,11 +21,9 @@ const Product = () => {
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await axios.get(
-          "https://server-zeta-nine-87.vercel.app/cards"
-        );
+        const response = await axios.get("https://server-zeta-nine-87.vercel.app/cards");
         setCards(response.data);
-        console.log(response.data);
+        console.log("Fetched cards:", response.data);
       } catch (error) {
         console.error("Error fetching cards:", error);
       }
@@ -39,14 +36,13 @@ const Product = () => {
   useEffect(() => {
     if (user) {
       const filteredCards = cards.filter(
-        (card) =>
-          card.email?.toLowerCase().trim() === user.email?.toLowerCase().trim()
+        (card) => card.email?.toLowerCase().trim() === user.email?.toLowerCase().trim()
       );
       setUserCards(filteredCards);
       setIsCheckoutDisabled(filteredCards.length === 0);
     }
   }, [cards, user]);
-
+  console.log("User Cards:", userCards);
   // Calculate total values
   const subtotalPrice = userCards.reduce(
     (total, item) => total + (parseFloat(item.price) || 0),
@@ -65,7 +61,7 @@ const Product = () => {
   // Handle checkout button click
   const handleCheckoutClick = () => {
     if (userCards.length > 0) {
-      setIsPaymentOpen(true); // Open the dialog
+      setIsPaymentOpen(true);
     }
   };
 
@@ -73,42 +69,51 @@ const Product = () => {
   const onClose = () => {
     setOpen(false);
   };
-// handle delete
-const handleDelete = (product) => {
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      console.log(product._id);
-      axiosPublic
-        .delete(`/cards/${product._id}`)
-        .then((res) => {
-          if (res.data.deletedCount > 0) {
-            refetch();
+
+  // Handle delete
+  const [dummyState, setDummyState] = useState(0);
+
+  const handleDelete = (productId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosPublic
+          .delete(`/cards/${productId._id}`)
+          .then((res) => {
+            console.log("Delete response:", res.data); // Log the response
+  
+            if (res.data.message === 'Product deleted successfully') {
+             
+              window.location.reload()
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+              window.location.reload()
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting product:", error);
             Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
+              title: "Error!",
+              text: "Failed to delete the product.",
+              icon: "error",
             });
-          }
-        })
-        .catch((error) => {
-          console.error("Error deleting product:", error);
-          Swal.fire({
-            title: "Error!",
-            text: "Failed to delete the product.",
-            icon: "error",
           });
-        });
-    }
-  });
-};
+      }
+    });
+  };
+  
+  
+
   return (
     <div className="max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold my-10">An Overview of your order list</h1>
@@ -155,14 +160,13 @@ const handleDelete = (product) => {
                           Discount {product.discount}
                         </p>
                         <div className="flex">
-                        <button
-  type="button"
-  className="font-medium text-[#0e7673] hover:text-indigo-500"
-  onClick={() => handleDelete(product)}
-   // Pass the product ID to handleDelete
->
-  Remove
-</button>
+                          <button
+                            type="button"
+                            className="font-medium text-[#0e7673] hover:text-indigo-500"
+                            onClick={() => handleDelete(product)}
+                          >
+                            Remove
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -226,40 +230,27 @@ const handleDelete = (product) => {
         onClose={() => setIsPaymentOpen(false)}
         className="relative z-10"
       >
-        <DialogBackdrop className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-500 ease-in-out" />
-        <div className="fixed inset-0 overflow-hidden flex items-center justify-center">
-          <DialogPanel className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out bg-white shadow-xl">
-            <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-              <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-                <div className="flex items-start justify-between">
-                  <DialogTitle className="text-lg font-medium text-gray-900">
-                    Payment
-                  </DialogTitle>
-                  <div className="ml-3 flex h-7 items-center">
-                    <button
-                      type="button"
-                      onClick={() => setIsPaymentOpen(false)}
-                      className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
-                    >
-                      <span className="absolute -inset-0.5" />
-                      <span className="sr-only">Close panel</span>
-                      <XMarkIcon aria-hidden="true" className="h-6 w-6" />
-                    </button>
-                  </div>
-                </div>
-                <Payment
-                  onPaymentSelect={(method) =>
-                    console.log("Selected payment method:", method)
-                  }
-                />
-              </div>
-            </div>
-          </DialogPanel>
-        </div>
+        <DialogBackdrop
+          onClick={() => setIsPaymentOpen(false)}
+          className="fixed inset-0 bg-gray-500/75"
+        />
+        <DialogPanel className="relative w-full max-w-md p-6 mx-auto bg-white rounded">
+          <DialogTitle
+            as="h3"
+            className="text-lg font-medium leading-6 text-gray-900"
+          >
+            Payment
+          </DialogTitle>
+          <div className="mt-2">
+            <Payment
+              userCards={userCards}
+              onClose={() => setIsPaymentOpen(false)}
+            />
+          </div>
+        </DialogPanel>
       </Dialog>
     </div>
   );
 };
 
 export default Product;
-

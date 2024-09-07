@@ -40,6 +40,7 @@ const Card = ({ card, refetch }) => {
     onSuccess: () => {
       toast.success("Added Product Successfully!");
       setIsAddedToCart(true);
+      window.location.reload()
       refetch()
     },
     onError: () => {
@@ -126,7 +127,7 @@ const Card = ({ card, refetch }) => {
         >
           {piece > 0
             ? isAddedToCart
-              ? "View Cart"
+              ? "Add more you want"
               : "Add to cart"
             : "Stock Out"}
         </button>

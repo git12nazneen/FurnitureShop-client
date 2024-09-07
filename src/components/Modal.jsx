@@ -164,14 +164,17 @@ const Modal = () => {
         axiosPublic
           .delete(`/cards/${product._id}`)
           .then((res) => {
-            if (res.data.deletedCount > 0) {
-              console.log('Refetching data...');
-            refetch();  // Ensure refetch is actually called
+            console.log("Delete response:", res.data); // Log the response
+  
+            if (res.data.message === 'Product deleted successfully') {
+             
+              window.location.reload()
               Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",
                 icon: "success",
               });
+              window.location.reload()
             }
           })
           .catch((error) => {
