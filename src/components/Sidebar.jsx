@@ -29,7 +29,7 @@ const Sidebar = ({ sideCollaps, setCategory }) => {
   };
 
   return (
-    <aside className={`shadow-xl  ${sideCollaps ? "w-64" : "w-16"}`}>
+    <aside className={`shadow-xl  ${sideCollaps ? "w-40 lg:w-64" : "w-12 lg:w-16"}`}>
       <div className="p-2 bg-white max-h-screen text-black">
         <div
           className={`${
@@ -45,7 +45,7 @@ const Sidebar = ({ sideCollaps, setCategory }) => {
         </div>
       </div>
       <Tabs onSelect={handleTabSelect} >
-        <TabList className="flex flex-col p-4 overflow-y-auto">
+        <TabList className="flex flex-col p-2 lg:p-4 overflow-y-auto">
           {links.map((link, idx) => (
             <Tab
               key={idx}
@@ -53,7 +53,7 @@ const Sidebar = ({ sideCollaps, setCategory }) => {
               onClick={() => handleClick(idx)}
             >
               {link.icon}
-              <span className={`font-semibold ${sideCollaps ? "block" : "hidden md:block"}`}>
+              <span className={`font-light lg:font-semibold ${sideCollaps ? "block" : "hidden md:block"}`}>
                 {link.title}
               </span>
             </Tab>

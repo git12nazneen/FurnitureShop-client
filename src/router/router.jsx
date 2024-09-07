@@ -6,7 +6,6 @@ import Home from "../pages/homePage/Home";
 import Register from '../authentication/Register';
 import Login from '../authentication/Login';
 import Dashboard from '../dashboard/Dashboard';
-import Allorder from '../dashboard/Allorder';
 import ProductPage from '../dashboard/ProductPage';
 import SalesAmount from '../dashboard/SalesAmount';
 import Profile from '../dashboard/Profile';
@@ -57,10 +56,7 @@ const router = createBrowserRouter([
       path:'dashboard',
       element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children:[
-        {
-          path:'allOrder',
-          element:<Allorder/>
-        },
+      
         {
           path:'addFrom',
           element:<AddFrom/>

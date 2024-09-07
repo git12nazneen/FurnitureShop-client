@@ -1,3 +1,4 @@
+
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../hooks/AppContext";
 import { Link } from "react-router-dom";
@@ -15,7 +16,6 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [shoppingModal, setShoppingModal] = useState(false);
   const { sideCollaps, setSideCollaps } = useContext(AppContext);
-  // const [cards, setCards] = useState([]);
   const [userCards, setUserCards] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const axiosSecure = useAxiosSecure();
@@ -37,7 +37,6 @@ const Nav = () => {
     toast.success("Logout successful");
   };
 
-
   const { data: cards = [], refetch } = useQuery({
     queryKey: ["cards"],
     queryFn: async () => {
@@ -45,7 +44,6 @@ const Nav = () => {
       return res.data;
     },
   });
-
 
   useEffect(() => {
     if (user) {
@@ -110,14 +108,12 @@ const Nav = () => {
             <Link
               to="/"
               className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-              href="#home"
             >
               Home
             </Link>
             <Link
               to="/product"
               className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-              href="#shop"
             >
               Products
             </Link>
@@ -139,24 +135,51 @@ const Nav = () => {
             >
               Blog
             </a>
+            {/* Login/SignUp in Mobile View */}
+            {user ? (
+              <div className="relative">
+                <img
+                  src={user.photoURL ? user.photoURL : userImg}
+                  alt="User"
+                  className="w-10 h-10 rounded-full object-cover cursor-pointer"
+                  onClick={toggleMenu}
+                />
+                {menuOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                    <div
+                      onClick={handleSignOut}
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    >
+                      Logout
+                    </div>
+                    <Link
+                      to="/dashboard/profile"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Dashboard
+                    </Link>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="px-2 lg:px-4 py-1 lg:py-2 text-white font-xl bg-black rounded hover:bg-red-600">
+                <Link to="/login">Login / SignUp</Link>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* landascape menu */}
-
-        {/* <!-- Nav Links --> */}
-        <div className="hidden md:flex py-2 space-x-10 px-6  items-center ">
+        {/* Desktop View Nav Links */}
+        <div className="hidden md:flex py-2 space-x-10 px-6  items-center">
           <Link
             to="/"
             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-            href="#home"
           >
             Home
           </Link>
           <Link
             to="/product"
             className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
-            href="#shop"
           >
             Products
           </Link>
@@ -222,7 +245,7 @@ const Nav = () => {
               )}
             </div>
           ) : (
-            <div className="px-4 py-2 text-white font-xl bg-black rounded hover:bg-red-600">
+            <div className="hidden md:block px-2 lg:px-4 py-1 lg:py-2 text-white font-xl bg-black rounded hover:bg-red-600">
               <Link to="/login">Login / SignUp</Link>
             </div>
           )}
@@ -230,7 +253,9 @@ const Nav = () => {
       </div>
 
       {/* Modal */}
-      {shoppingModal && <Modal />}
+      {shoppingModal && (
+        <Modal setShoppingModal={setShoppingModal} userCards={userCards} />
+      )}
     </nav>
   );
 };

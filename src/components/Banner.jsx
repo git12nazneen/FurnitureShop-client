@@ -66,8 +66,8 @@ const Banner = ({ selectedCategory }) => {
   const pageNumbers = [...Array(totalPages).keys()].map((num) => num + 1);
 
   return (
-    <div className="my-10 mx-10 w-auto md:max-w-4xl lg:max-w-5xl">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div className="my-10 mx-7 lg:mx-10 w-auto md:max-w-4xl lg:max-w-5xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-center">
         {currentCards.map((product) => (
           <Card key={product.id} card={product} refetch={refetch}/>
         ))}
@@ -77,7 +77,7 @@ const Banner = ({ selectedCategory }) => {
         <button
           onClick={handlePrevPage}
           disabled={currentPage === 1}
-          className={`px-4 py-2 rounded ${
+          className={`px-2 lg:px-4 py-2 rounded ${
             currentPage === 1 ? "bg-gray-300 text-gray-500" : "bg-blue-500 text-white"
           }`}
         >
@@ -88,7 +88,7 @@ const Banner = ({ selectedCategory }) => {
           <button
             key={number}
             onClick={() => handlePageClick(number)}
-            className={`px-4 py-1 rounded ${
+            className={`px-2 lg:px-4 py-1 rounded ${
               currentPage === number
                 ? "bg-blue-500 text-white"
                 : "bg-gray-300 text-gray-700"
@@ -101,7 +101,7 @@ const Banner = ({ selectedCategory }) => {
         <button
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
-          className={`px-4 py-2 rounded ${
+          className={`px-2 lg:px-4 py-2 rounded ${
             currentPage === totalPages ? "bg-gray-300 text-gray-500" : "bg-blue-500 text-white"
           }`}
         >

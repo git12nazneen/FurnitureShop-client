@@ -87,7 +87,7 @@ const Card = ({ card, refetch }) => {
   };
 
   return (
-    <div className="w-72 overflow-hidden bg-white hover:bg-gray-800 rounded-lg shadow-lg  group">
+    <div className="w-60 lg:w-72 overflow-hidden bg-white hover:bg-gray-800 rounded-lg shadow-lg  group">
       <Link to={`/products/${_id}`}>
         <img
           className="object-cover hover:bg-black hover:opacity-35 object-center w-full h-56"
@@ -113,7 +113,7 @@ const Card = ({ card, refetch }) => {
            {discount}
           </h2>
         </div>
-        <h1 className="text-[#60a87e] mb-4  group-hover:text-white">
+        <h1 className="text-gray-600 mb-4  group-hover:text-white">
           {description.slice(0, 50)}
         </h1>
 
