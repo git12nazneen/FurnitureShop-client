@@ -199,14 +199,14 @@ const ProductPage = () => {
                                 : "bg-red-100/60 dark:bg-gray-800"
                             }`}
                           >
-                            <h2>{product.product_name}</h2>
+                            <h2>{product.title}</h2>
                           </div>
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                           {product.price}
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                          {product.company}
+                          Wood
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                           <div className="flex items-center gap-x-2">

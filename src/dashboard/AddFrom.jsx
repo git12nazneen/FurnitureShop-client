@@ -31,27 +31,27 @@ const AddFrom = () => {
     e.preventDefault();
     setLoading(true);
     const form = e.target;
-    const name = form.name.value;
-    const company = form.company.value;
+    const title = form.name.value;
+   
     const originalPrice = form.originalPrice.value;
-    const doses = form.doses.value;
+    const category = form.category.value;
     const image = form.image.value;
     const price = form.price.value;
     const discount = form.discount.value;
-    const capsuleInfo = form.capsuleInfo.value;
+  
     const description = form.description.value;
     const date = new Date(form.date.value);
   
     try {
       const productData = {
-        name,
-        company,
+       title,
+        
         originalPrice,
-        doses,
+       category,
         image,
         price,
         discount,
-        capsuleInfo,
+        
         description,
         date,
       };

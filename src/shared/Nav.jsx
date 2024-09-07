@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Modal from "../components/Modal";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
-import axios from "axios";
 import { AiOutlineShopping } from "react-icons/ai";
 import fImg from "../assets/F.png";
 import userImg from "../assets/pngwing.com.png";

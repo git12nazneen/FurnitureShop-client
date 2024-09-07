@@ -59,20 +59,7 @@ const DashSidebar = ({ isAdmin }) => {
                                         All Customers
                                     </NavLink>
                                 </li>
-                                <li className="my-2">
-                                    <NavLink
-                                        to="/dashboard/allOrder"
-                                        className={({ isActive }) =>
-                                            `block p-3 rounded-md transition-colors ${
-                                                isActive
-                                                    ? 'bg-sky-800 font-bold'
-                                                    : 'bg-sky-800 hover:bg-gray-400'
-                                            }`
-                                        }
-                                    >
-                                        All Orders
-                                    </NavLink>
-                                </li>
+                            
                                 <li className="my-2">
                                     <NavLink
                                         to="/dashboard/productPage"
