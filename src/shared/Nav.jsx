@@ -220,7 +220,7 @@ const Nav = () => {
 
           {/* User Presence */}
           {user ? (
-            <div className="relative">
+            <div className="relative hidden md:block">
               <img
                 src={user.photoURL ? user.photoURL : userImg}
                 alt="User"
@@ -228,10 +228,10 @@ const Nav = () => {
                 onClick={toggleMenu}
               />
               {menuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                <div className="absolute   right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
                   <div
                     onClick={handleSignOut}
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    className="px-4 py-2  hover:bg-gray-100 cursor-pointer"
                   >
                     Logout
                   </div>
