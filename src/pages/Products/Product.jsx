@@ -108,13 +108,11 @@ const Product = () => {
                         <p className="mt-1 text-sm text-gray-500">
                           Price: $ {product.originalPrice}
                         </p>
-                        <p className="mt-1 text-sm text-gray-500">
-                          Discount {product.discount}
-                        </p>
+                      
                       </div>
                       <div className="flex flex-1 items-end justify-between text-sm">
-                        <p className="mt-1 text-sm text-gray-500">
-                          Qty {product.capsuleInfo}
+                      <p className="mt-1 text-sm text-gray-500">
+                          Discount {product.discount}
                         </p>
                         <div className="flex">
                           <button

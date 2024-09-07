@@ -101,14 +101,14 @@ const Card = ({ card }) => {
       <div className="px-6 py-2 group-hover:text-white">
         <div className="flex gap-7 py-3">
           <h2 className="text-sm font-bold group-hover:text-white  ">
-            ${price}
+           Price ${price}
           </h2>
           <h2 className="text-sm font-bold text-gray-500 group-hover:text-white line-through">
             ${originalPrice}
           </h2>
 
           <h2 className="text-sm font-bold group-hover:text-white text-red-600">
-            {discount}
+          Discount  {discount}
           </h2>
         </div>
         <h1 className="text-[#60a87e] mb-4  group-hover:text-white">

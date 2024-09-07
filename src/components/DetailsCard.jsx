@@ -105,9 +105,7 @@ const DetailsCard = () => {
 
           {/* CTA Button */}
           <div className="mt-6">
-            <button className="w-full px-5 py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">
-              Add to Cart
-            </button>
+            <h1 className="text-2xl font-bold">Fresh and Solid wood</h1>
           </div>
         </div>
       </main>
