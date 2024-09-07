@@ -177,7 +177,7 @@ const Product = () => {
           )}
         </div>
         {/* Checkout Section */}
-        <div className="w-full lg:w-1/3 mb-10">
+        <div className="w-full lg:w-1/3 -mt-16 mb-10">
           <h1 className="text-3xl font-bold">Order Details</h1>
           <div className="mt-4 bg-gray-100 border rounded-lg">
             <div className="border-t space-y-2 border-gray-200 px-4 py-6 sm:px-6">
@@ -188,15 +188,25 @@ const Product = () => {
               <div className="flex justify-between text-base font-medium text-gray-900">
                 <p>Discount</p>
                 <p>${totalDiscount.toFixed(2)}</p>
+              </div> 
+              <div className="flex justify-between text-base font-medium text-gray-900">
+                <p>Shipping</p>
+                <p>Free</p>
+              </div>
+              <div className="flex justify-between text-base font-medium text-gray-900">
+                <p>Estimated Tex</p>
+                <p>$-</p>
               </div>
               <div className="flex justify-between text-base font-medium text-gray-900">
                 <p>Subtotal</p>
                 <p>${totalPrice.toFixed(2)}</p>
               </div>
-              <p className="mt-0.5 text-sm text-gray-500">
-                Shipping and taxes calculated at checkout.
-              </p>
-              <div className="mt-6">
+              
+             
+             
+            </div>
+          </div>
+          <div className="mt-6">
                 <button
                   onClick={handleCheckoutClick}
                   disabled={isCheckoutDisabled}
@@ -207,20 +217,6 @@ const Product = () => {
                   Checkout
                 </button>
               </div>
-              <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                <p>
-                  or{" "}
-                  <Link to='/'
-                    type="button"
-                    className="font-medium text-[#0e7673] hover:text-indigo-500"
-                  >
-                    Continue Shopping
-                    <span aria-hidden="true"> &rarr;</span>
-                  </Link>
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 

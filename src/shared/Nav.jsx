@@ -1,7 +1,6 @@
-
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../hooks/AppContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Modal from "../components/Modal";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
@@ -19,6 +18,7 @@ const Nav = () => {
   const [userCards, setUserCards] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const axiosSecure = useAxiosSecure();
+  const location = useLocation(); // Get the current location
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -54,6 +54,9 @@ const Nav = () => {
       setUserCards(filteredCards);
     }
   }, [cards, user]);
+
+  // Determine if the current path matches a link
+  const isActive = (path) => location.pathname === path;
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow dark:bg-gray-800">
@@ -107,30 +110,40 @@ const Nav = () => {
           <div className="relative mt-4 space-y-4 px-6 py-4">
             <Link
               to="/"
-              className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+              className={`block transition-colors duration-300 transform ${
+                isActive("/") ? "bg-gray-200 px-4 py-2 rounded-md" : "text-gray-700 hover:text-blue-500"
+              }`}
             >
               Home
             </Link>
             <Link
               to="/product"
-              className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+              className={`block transition-colors duration-300 transform ${
+                isActive("/product") ? "bg-gray-200 px-4 py-2 rounded-md" : "text-gray-700 hover:text-blue-500"
+              }`}
             >
               Products
             </Link>
             <a
-              className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+              className={`block transition-colors duration-300 transform ${
+                isActive("/category") ? "bg-gray-200 px-4 py-2 rounded-md" : "text-gray-700 hover:text-blue-500"
+              }`}
               href="#contact"
             >
               Category
             </a>
             <a
-              className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+              className={`block transition-colors duration-300 transform ${
+                isActive("/customer") ? "bg-gray-200 px-4 py-2 rounded-md" : "text-gray-700 hover:text-blue-500"
+              }`}
               href="#about"
             >
               Customer
             </a>
             <a
-              className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+              className={`block transition-colors duration-300 transform ${
+                isActive("/blog") ? "bg-gray-200 px-4 py-2 rounded-md" : "text-gray-700 hover:text-blue-500"
+              }`}
               href="#about"
             >
               Blog
@@ -170,33 +183,43 @@ const Nav = () => {
         </div>
 
         {/* Desktop View Nav Links */}
-        <div className="hidden md:flex py-2 space-x-10 px-6  items-center">
+        <div className="hidden md:flex py-2 space-x-10 px-6 items-center">
           <Link
             to="/"
-            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+            className={`block transition-colors duration-300 transform ${
+              isActive("/") ? "bg-gray-200 px-4 py-2 rounded-md" : "text-gray-700 hover:text-blue-500"
+            }`}
           >
             Home
           </Link>
           <Link
             to="/product"
-            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+            className={`block transition-colors duration-300 transform ${
+              isActive("/product") ? "bg-gray-200 px-4 py-2 rounded-md" : "text-gray-700 hover:text-blue-500"
+            }`}
           >
             Products
           </Link>
           <a
-            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+            className={`block transition-colors duration-300 transform ${
+              isActive("/category") ? "bg-gray-200 px-4 py-2 rounded-md" : "text-gray-700 hover:text-blue-500"
+            }`}
             href="#contact"
           >
             Category
           </a>
           <a
-            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+            className={`block transition-colors duration-300 transform ${
+              isActive("/customer") ? "bg-gray-200 px-4 py-2 rounded-md" : "text-gray-700 hover:text-blue-500"
+            }`}
             href="#about"
           >
             Customer
           </a>
           <a
-            className="block text-gray-700 transition-colors duration-300 transform hover:text-blue-500"
+            className={`block transition-colors duration-300 transform ${
+              isActive("/blog") ? "bg-gray-200 px-4 py-2 rounded-md" : "text-gray-700 hover:text-blue-500"
+            }`}
             href="#about"
           >
             Blog
@@ -228,10 +251,10 @@ const Nav = () => {
                 onClick={toggleMenu}
               />
               {menuOpen && (
-                <div className="absolute   right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
                   <div
                     onClick={handleSignOut}
-                    className="px-4 py-2  hover:bg-gray-100 cursor-pointer"
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                   >
                     Logout
                   </div>
@@ -245,17 +268,15 @@ const Nav = () => {
               )}
             </div>
           ) : (
-            <div className="hidden md:block px-2 lg:px-4 py-1 lg:py-2 text-white font-xl bg-black rounded hover:bg-red-600">
+            <div className="px-2 lg:px-4 py-1 lg:py-2 text-white font-xl bg-black rounded hover:bg-red-600">
               <Link to="/login">Login / SignUp</Link>
             </div>
           )}
         </div>
       </div>
 
-      {/* Modal */}
-      {shoppingModal && (
-        <Modal setShoppingModal={setShoppingModal} userCards={userCards} />
-      )}
+      {/* Modal Shopping */}
+      {shoppingModal && <Modal setShoppingModal={setShoppingModal} />}
     </nav>
   );
 };
