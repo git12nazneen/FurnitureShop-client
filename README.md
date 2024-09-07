@@ -8,6 +8,10 @@ Develop core functionalities for an E-commerce WebApp using React, Context API, 
 
 Check out the live demo of the E-commerce WebApp [here](furniture-shop-48a7b.web.app).
 
+## Admin 
+email: noor@gmail.com
+pass:asdf1234
+
 ## Features
 
 ### User Authentication
