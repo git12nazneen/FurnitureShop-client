@@ -48,7 +48,7 @@ Check out the live demo of the E-commerce WebApp [here](furniture-shop-48a7b.web
 
 1. **Clone the Repo:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/git12nazneen/FurnitureShop-client
 
 2. **Install Dependency:**
     ``npm install
