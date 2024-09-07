@@ -1,30 +1,32 @@
 import { useState } from "react";
-import { IoMdHome } from "react-icons/io";
-import { MdOutlineWidgets } from "react-icons/md";
+import { FaChair } from "react-icons/fa";
+import { MdChair } from "react-icons/md";
+import { PiOfficeChairBold } from "react-icons/pi";
+
 import { RiStickyNote2Line } from "react-icons/ri";
-import { LuChevronLeft } from "react-icons/lu";
+
 
 const Sidebar = ({ sideCollaps }) => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const links = [
     {
-      title: "Common Condition",
+      title: "Rocking Chair",
       path: "/",
-      icon: <IoMdHome />,
-      subLinks: [
-        { title: "Condition 1", path: "/sub-item-1" },
-        { title: "Condition 2", path: "/sub-item-2" },
-      ],
+      icon: <PiOfficeChairBold />,
+      
     },
     {
-      title: "Blood Pressure and Heart",
+      title: "Side Chair",
       path: "/",
-      icon: <MdOutlineWidgets />,
-      subLinks: [
-        { title: "Blood Pressure", path: "/sub-item-1" },
-        { title: "Heart Disease", path: "/sub-item-2" },
-      ],
+      icon: <FaChair />,
+    
+    },
+    {
+      title: "Lounge Chair",
+      path: "/",
+      icon: <MdChair />,
+     
     },
   ];
 
@@ -33,7 +35,7 @@ const Sidebar = ({ sideCollaps }) => {
   };
 
   return (
-    <aside className={`shadow-xl  h-screen ${sideCollaps ? "w-64" : "w-16"}`}>
+    <aside className={`shadow-xl max-h-min ${sideCollaps ? "w-64" : "w-16"}`}>
       <div className="p-2 bg-white text-black">
         <div
           className={`${
@@ -42,8 +44,8 @@ const Sidebar = ({ sideCollaps }) => {
               : "hidden"
           }`}
         >
-          <div className="rounded-full bg-[#ec4f54] p-4 text-center">
-            <RiStickyNote2Line className="w-full" />
+          <div className="rounded-full bg-black p-4 text-center">
+            <RiStickyNote2Line className="w-full text-white" />
           </div>
           <h2 className="text-xl font-semibold">Favorite</h2>
         </div>
@@ -74,24 +76,9 @@ const Sidebar = ({ sideCollaps }) => {
                 >
                   {link.title}
                 </span>
-                <h1 className="-rotate-90">
-                  <LuChevronLeft />
-                </h1>
+                
               </a>
-              {link.subLinks && openIndex === idx && (
-                <ul className="pl-6 mt-2 bg-sky-100 rounded-lg">
-                  {link.subLinks.map((subLink, subIdx) => (
-                    <li key={subIdx} className="p-2">
-                      <a
-                        href={subLink.path}
-                        className={`block hover:bg-black hover:text-white active:text-white rounded-lg p-2 flex items-center gap-2`}
-                      >
-                        {subLink.title}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
+             
             </li>
           ))}
         </ul>

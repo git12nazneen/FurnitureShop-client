@@ -85,7 +85,7 @@ const Card = ({ card }) => {
   };
 
   return (
-    <div className="w-72 overflow-hidden bg-white hover:bg-gray-800 rounded-lg shadow-lg dark:bg-gray-800 group">
+    <div className="w-72 overflow-hidden bg-white hover:bg-gray-800 rounded-lg shadow-lg  group">
       <Link to={`/products/${_id}`}>
         <img
           className="object-cover hover:bg-black hover:opacity-35 object-center w-full h-56"
@@ -93,8 +93,8 @@ const Card = ({ card }) => {
           alt="avatar"
         />
       </Link>
-      <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200 px-6 pt-4 pb-2 group-hover:text-white">
-        <h1 className="text-xl font-semibold text-gray-800 dark:text-white group-hover:text-white">
+      <div className="flex items-center mt-4 text-gray-700  px-6 pt-4 pb-2 group-hover:text-white">
+        <h1 className="text-xl font-semibold text-gray-800  group-hover:text-white">
           {title}
         </h1>
       </div>
@@ -111,7 +111,7 @@ const Card = ({ card }) => {
             {discount}
           </h2>
         </div>
-        <h1 className="text-[#60a87e] mb-4 dark:text-white group-hover:text-white">
+        <h1 className="text-[#60a87e] mb-4  group-hover:text-white">
           {description.slice(0, 50)}
         </h1>
 
