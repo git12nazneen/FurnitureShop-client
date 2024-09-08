@@ -18,10 +18,10 @@ const DashSidebar = ({ isAdmin }) => {
 
             {/* Sidebar */} 
             <aside
-                className={`fixed top-0 left-0 max-h-screen bg-sky-800 shadow-xl transition-transform duration-300 ease-in-out 
+                className={`fixed top-0 left-0 max-h-screen  shadow-xl transition-transform duration-300 ease-in-out 
                 ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:w-64 md:static md:h-full`}
             >
-                <div className="p-4 max-h-screen bg-sky-800 text-white flex flex-col">
+                <div className="p-4 max-h-screen  text-white flex flex-col">
                     <div className="flex items-center justify-between p-4 md:hidden">
                         <span className="text-lg font-semibold">Menu</span>
                         <button onClick={() => setIsOpen(false)} className="text-2xl">

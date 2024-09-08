@@ -14,7 +14,7 @@ const UpdateProduct = () => {
            
             price: products.price,
             originalPrice: products.originalPrice,
-            image: products.image,
+        image: products.image,
             discount: products.discount,
             piece: products.piece,
 
@@ -53,15 +53,15 @@ const UpdateProduct = () => {
                         
 
                         <div className="space-y-1 text-sm">
-                            <label htmlFor="price" className="block text-gray-600">Original Price</label>
+                            <label htmlFor="originalPrice" className="block text-gray-600">Original Price</label>
                             <input
                                 className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-[#0e7673] rounded-md"
-                                {...register('price', { required: true })}
-                                id="price"
+                                {...register('originalPrice', { required: true })}
+                                id="originalPrice"
                                 type="number"
                                 placeholder="55.00"
                             />
-                            {errors.price && <span className="text-red-500">Price is required</span>}
+                            {errors.originalPrice && <span className="text-red-500">Price is required</span>}
                         </div>
 
                         
