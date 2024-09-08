@@ -16,13 +16,14 @@ const Payment = ({ onPaymentSelect }) => {
   return (
     <div>
       <h2>Payment Options</h2>
-      <Link to='/dashboard/checkoutform'>
+      <Link to= '/dashboard/checkoutform'>
         <input
           type="radio"
           value="cod"
           to='/dashboard/checkoutform'
           checked={selectedOption === 'cod'}
           onChange={handleOptionChange}
+         
         />
         Cash on Delivery
       </Link>

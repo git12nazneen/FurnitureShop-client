@@ -51,7 +51,7 @@ const AddFrom = () => {
         image,
         price,
         discount,
-        
+        piece,
         description,
         date,
       };

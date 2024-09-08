@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -10,14 +10,14 @@ const UpdateProduct = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
-            name: products.name,
-            company: products.company,
+            title: products.title,
+           
             price: products.price,
-            doses: products.doses,
             originalPrice: products.originalPrice,
             image: products.image,
             discount: products.discount,
-            capsuleInfo: products.capsuleInfo,
+            piece: products.piece,
+
             description: products.description,
         }
     });
@@ -39,28 +39,18 @@ const UpdateProduct = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                     <div className="space-y-6">
                         <div className="space-y-1 text-sm">
-                            <label htmlFor="name" className="block text-gray-600">Product Name</label>
+                            <label htmlFor="title" className="block text-gray-600">Product Name</label>
                             <input
                                 className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-[#0e7673] rounded-md"
-                                {...register('name', { required: true })}
-                                id="name"
+                                {...register('title', { required: true })}
+                                id="title"
                                 type="text"
                                 placeholder="Amoxicillin"
                             />
-                            {errors.name && <span className="text-red-500">Product name is required</span>}
+                            {errors.title && <span className="text-red-500">Product name is required</span>}
                         </div>
 
-                        <div className="space-y-1 text-sm">
-                            <label htmlFor="company" className="block text-gray-600">Company</label>
-                            <input
-                                className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-[#0e7673] rounded-md"
-                                {...register('company', { required: true })}
-                                id="company"
-                                type="text"
-                                placeholder="Antibiotic Pharma"
-                            />
-                            {errors.company && <span className="text-red-500">Company name is required</span>}
-                        </div>
+                        
 
                         <div className="space-y-1 text-sm">
                             <label htmlFor="price" className="block text-gray-600">Original Price</label>
@@ -74,31 +64,18 @@ const UpdateProduct = () => {
                             {errors.price && <span className="text-red-500">Price is required</span>}
                         </div>
 
-                        <div className="space-y-1 text-sm">
-                            <label htmlFor="doses" className="block text-gray-600">Doses</label>
-                            <select
-                                {...register('doses', { required: true })}
-                                id="doses"
-                                className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-[#0e7673] rounded-md"
-                            >
-                                <option value="" disabled>Select dose</option>
-                                <option value="250mg">250mg</option>
-                                <option value="500mg">500mg</option>
-                                <option value="600mg">600mg</option>
-                            </select>
-                            {errors.doses && <span className="text-red-500">Dose is required</span>}
-                        </div>
+                        
 
                         <div className="space-y-1 text-sm">
-                            <label htmlFor="originalPrice" className="block text-gray-600">Packet</label>
+                            <label htmlFor="piece" className="block text-gray-600">Piece</label>
                             <input
                                 className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-[#0e7673] rounded-md"
-                                {...register('originalPrice', { required: true })}
-                                id="originalPrice"
+                                {...register('piece', { required: true })}
+                                id="piece"
                                 type="number"
                                 placeholder="10"
                             />
-                            {errors.originalPrice && <span className="text-red-500">Packet information is required</span>}
+                            {errors.piece && <span className="text-red-500">Piece information is required</span>}
                         </div>
                     </div>
 
@@ -139,17 +116,7 @@ const UpdateProduct = () => {
                             {errors.discount && <span className="text-red-500">Discount is required</span>}
                         </div>
 
-                        <div className="space-y-1 text-sm">
-                            <label htmlFor="capsuleInfo" className="block text-gray-600">Capsule Info</label>
-                            <input
-                                className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-[#0e7673] rounded-md"
-                                {...register('capsuleInfo', { required: true })}
-                                id="capsuleInfo"
-                                type="text"
-                                placeholder="30 Capsules"
-                            />
-                            {errors.capsuleInfo && <span className="text-red-500">Capsule information is required</span>}
-                        </div>
+                       
 
                         <div className="space-y-1 text-sm">
                             <label htmlFor="description" className="block text-gray-600">Description</label>
