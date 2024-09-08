@@ -38,6 +38,7 @@ pass:asdf1234
 - **Goal:** User profile and order history management.
 - **Tech:** Integrated with authentication.
 - **Details:** Secure access, responsive design with Tailwind CSS.
+- **Admin:** Admin control all the  things, here admin add products and see all info like users info , payment info.
 
 ### Checkout (Optional)
 - **Goal:** Prepare for a cash-on-delivery checkout process.
@@ -58,4 +59,5 @@ pass:asdf1234
     ``npm install
     
 3. **Start Development Server:**
- ``npm start
+ ``npm run dev
+
