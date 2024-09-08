@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -10,8 +10,7 @@ import useAuth from "../hooks/useAuth";
 import Payment from "./Payment";
 import Swal from "sweetalert2";
 import UseAxiosPublic from "../hooks/UseAxiosPublice";
-import { useQuery, } from "@tanstack/react-query";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+import useCardsData from "../hooks/userCardsData";
 
 
 
@@ -68,67 +67,13 @@ const ProductDetailsDialog = ({ product, isOpen, onClose }) => {
 // Main Modal Component
 const Modal = () => {
   const [open, setOpen] = useState(true);
-  const [imageModalOpen, setImageModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState("");
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  // const [cards, setCards] = useState([]);
-  const [userCards, setUserCards] = useState([]);
-  const [isCheckoutDisabled, setIsCheckoutDisabled] = useState(false);
   const { user } = useAuth();
   const axiosPublic = UseAxiosPublic();
-  const axiosSecure = useAxiosSecure();
 
-  // get card
-  // useEffect(() => {
-  //   const fetchCards = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         "https://server-zeta-nine-87.vercel.app/cards"
-  //       );
-  //       setCards(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching cards:", error);
-  //     }
-  //   };
-
-  //   fetchCards();
-  // }, []);
-  const { data: cards = [], refetch } = useQuery({
-    queryKey: ["cards"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/cards");
-      return res.data;
-    },
-  });
-
-  useEffect(() => {
-    if (user) {
-      const filteredCards = cards.filter(
-        (card) =>
-          card.email?.toLowerCase().trim() === user.email?.toLowerCase().trim()
-      );
-      setUserCards(filteredCards);
-      setIsCheckoutDisabled(filteredCards.length === 0);
-    }
-  }, [cards, user]);
-
-  // total count
-  const subtotalPrice = userCards.reduce(
-    (total, item) => total + (parseFloat(item.price) || 0),
-    0
-  );
-
-  const totalDiscount = userCards.reduce((total, item) => {
-    const price = parseFloat(item.price) || 0;
-    const discountPercentage = parseFloat(item.discount) || 0;
-    const discountAmount = price * (discountPercentage / 100);
-    return total + discountAmount;
-  }, 0);
-
-  const totalPrice = subtotalPrice - totalDiscount;
-
+  const { userCards, isCheckoutDisabled, subtotalPrice, totalDiscount, totalPrice ,setUserCards,setIsCheckoutDisabled } = useCardsData(user);
 
   // checkout function
   const handleCheckoutClick = () => {

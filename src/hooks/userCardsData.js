@@ -44,6 +44,8 @@ const useCardsData = (user) => {
     subtotalPrice,
     totalDiscount,
     totalPrice,
+    setIsCheckoutDisabled,
+    setUserCards
   };
 };
 

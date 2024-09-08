@@ -5,8 +5,9 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import useCardsData from "../hooks/userCardsData";
 
-const CheckOutForm = ({ resetCart  }) => {
+const CheckOutForm = () => {
   const {
     register,
     handleSubmit,
@@ -16,6 +17,8 @@ const CheckOutForm = ({ resetCart  }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const { totalPrice } = useCardsData(user);
+  // console.log("total", totalPrice);
 
   // Populate form fields with user information
   React.useEffect(() => {
@@ -33,7 +36,7 @@ const CheckOutForm = ({ resetCart  }) => {
     },
     onSuccess: () => {
       toast.success("Order placed successfully!");
-      resetCart(); // Clear the cart after successful order
+     
       navigate("/");
     },
     onError: () => {
@@ -150,20 +153,21 @@ const CheckOutForm = ({ resetCart  }) => {
           </div>
 
           <div>
-  <label
-    className="text-gray-700 dark:text-gray-200"
-    htmlFor="totalAmount"
-  >
-    Total Amount
-  </label>
-  <input
-    id="totalAmount"
-    type="number"
-    step="0.01"
-   
-    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-#0e7673-400 focus:ring-#0e7673-300 focus:ring-opacity-40 dark:focus:border-#0e7673-300 focus:outline-none focus:ring"
-  />
-</div>
+            <label
+              className="text-gray-700 dark:text-gray-200"
+              htmlFor="totalAmount"
+            >
+              Total Amount
+            </label>
+            <input
+              id="totalAmount"
+              type="number"
+              step="0.01"
+              value={totalPrice} // Set the total amount from state
+              readOnly // Make the input read-only to prevent user edits
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-#0e7673-400 focus:ring-#0e7673-300 focus:ring-opacity-40 dark:focus:border-#0e7673-300 focus:outline-none focus:ring"
+            />
+          </div>
 
           <div>
             <label

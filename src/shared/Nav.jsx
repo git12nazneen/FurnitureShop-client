@@ -7,19 +7,16 @@ import toast from "react-hot-toast";
 import { AiOutlineShopping } from "react-icons/ai";
 import fImg from "../assets/F.png";
 import userImg from "../assets/pngwing.com.png";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../hooks/useAxiosSecure";
+import useCardsData from "../hooks/userCardsData";
 
 const Nav = () => {
   const { user, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [shoppingModal, setShoppingModal] = useState(false);
   const { sideCollaps, setSideCollaps } = useContext(AppContext);
-  const [userCards, setUserCards] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
-  const axiosSecure = useAxiosSecure();
   const location = useLocation(); // Get the current location
-
+  const { userCards } = useCardsData(user);
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -37,23 +34,23 @@ const Nav = () => {
     toast.success("Logout successful");
   };
 
-  const { data: cards = [], refetch } = useQuery({
-    queryKey: ["cards"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/cards");
-      return res.data;
-    },
-  });
+  // const { data: cards = [], refetch } = useQuery({
+  //   queryKey: ["cards"],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get("/cards");
+  //     return res.data;
+  //   },
+  // });
 
-  useEffect(() => {
-    if (user) {
-      const filteredCards = cards.filter(
-        (card) =>
-          card.email?.toLowerCase().trim() === user.email?.toLowerCase().trim()
-      );
-      setUserCards(filteredCards);
-    }
-  }, [cards, user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     const filteredCards = cards.filter(
+  //       (card) =>
+  //         card.email?.toLowerCase().trim() === user.email?.toLowerCase().trim()
+  //     );
+  //     setUserCards(filteredCards);
+  //   }
+  // }, [cards, user]);
 
   // Determine if the current path matches a link
   const isActive = (path) => location.pathname === path;
