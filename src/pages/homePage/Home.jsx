@@ -8,7 +8,7 @@ const Home = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
 
     return (
-        <div className='flex'>
+        <div className='flex mx-auto max-w-7xl'>
             <Sidebar setCategory={setSelectedCategory} sideCollaps={sideCollaps} />
             <Banner selectedCategory={selectedCategory} />
         </div>

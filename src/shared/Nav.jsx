@@ -33,30 +33,11 @@ const Nav = () => {
     logOut().then().catch();
     toast.success("Logout successful");
   };
-
-  // const { data: cards = [], refetch } = useQuery({
-  //   queryKey: ["cards"],
-  //   queryFn: async () => {
-  //     const res = await axiosSecure.get("/cards");
-  //     return res.data;
-  //   },
-  // });
-
-  // useEffect(() => {
-  //   if (user) {
-  //     const filteredCards = cards.filter(
-  //       (card) =>
-  //         card.email?.toLowerCase().trim() === user.email?.toLowerCase().trim()
-  //     );
-  //     setUserCards(filteredCards);
-  //   }
-  // }, [cards, user]);
-
   // Determine if the current path matches a link
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow dark:bg-gray-800">
+    <nav className="sticky top-0 z-50 bg-white shadow ">
       <div className="container px-6 py-3 mx-auto flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex items-center">
