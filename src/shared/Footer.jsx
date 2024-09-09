@@ -6,7 +6,7 @@ import { FaLinkedinIn } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 const Footer = () => {
   return (
-    <div className="mx-auto bg-black">
+    <div className="mx-auto container bg-black">
       <div className="py-14 mx-9 text-white font-light justify-center grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 text-center lg:text-left">
         <div className="space-y-3 lg:pr-10">
           <div className="flex justify-center lg:justify-start items-center">
