@@ -15,7 +15,7 @@ const Product = () => {
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const { user } = useAuth();
   const axiosPublic = UseAxiosPublic();
-  const { userCards, isCheckoutDisabled, subtotalPrice, totalDiscount, totalPrice } = useCardsData(user);
+  const { userCards, isCheckoutDisabled, subtotalPrice, totalDiscount, totalPrice,  refetch } = useCardsData(user);
 
   // Handle checkout button click
   const handleCheckoutClick = () => {
@@ -47,7 +47,8 @@ const Product = () => {
             console.log("Delete response:", res.data);
 
             if (res.data.message === 'Product deleted successfully') {
-              window.location.reload();
+              // window.location.reload();
+              refetch()
               Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",

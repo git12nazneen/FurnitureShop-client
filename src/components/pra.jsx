@@ -1,10 +1,14 @@
 
-  const { data: cards = [], isLoading, error } = useQuery({
-    queryKey: ["cards", user.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/cards/${user.email}`);
-      console.log(res.data); // Log the response to check if data is received correctly
-      return res.data;
-    },
-  });
+ // useEffect(() => {
+  //   const fetchCards = async () => {
+  //     try {
+  //       const response = await axios.get("https://server-zeta-nine-87.vercel.app/cards");
+  //       setCards(response.data);
+  //       console.log("Fetched cards:", response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching cards:", error);
+  //     }
+  //   };
 
+  //   fetchCards();
+  // }, []);

@@ -73,7 +73,7 @@ const Modal = () => {
   const { user } = useAuth();
   const axiosPublic = UseAxiosPublic();
 
-  const { userCards, isCheckoutDisabled, subtotalPrice, totalDiscount, totalPrice ,setUserCards,setIsCheckoutDisabled } = useCardsData(user);
+  const { userCards, isCheckoutDisabled, subtotalPrice, totalDiscount, totalPrice ,setUserCards,setIsCheckoutDisabled,refetch } = useCardsData(user);
 
   // checkout function
   const handleCheckoutClick = () => {
@@ -112,14 +112,15 @@ const Modal = () => {
             console.log("Delete response:", res.data); // Log the response
   
             if (res.data.message === 'Product deleted successfully') {
-             
-              window.location.reload()
+             refetch()
+              // window.location.reload()
               Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",
                 icon: "success",
               });
-              window.location.reload()
+              // window.location.reload()
+              refetch()
             }
           })
           .catch((error) => {

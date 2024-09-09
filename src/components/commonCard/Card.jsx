@@ -4,8 +4,9 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useCardsData from "../../hooks/userCardsData";
 
-const Card = ({ card, refetch }) => {
+const Card = ({ card }) => {
   const { user } = useAuth();
   const {
     image,
@@ -24,7 +25,7 @@ const Card = ({ card, refetch }) => {
 
   const [piece, setpiece] = useState(initialpiece); // Initialize local piece state
   const [isAddedToCart, setIsAddedToCart] = useState(false);
-
+  const {refetch} = useCardsData(user)
   const axiosSecure = useAxiosSecure();
 
   const { mutateAsync } = useMutation({
@@ -40,7 +41,7 @@ const Card = ({ card, refetch }) => {
     onSuccess: () => {
       toast.success("Added Product Successfully!");
       setIsAddedToCart(true);
-      window.location.reload()
+      // window.location.reload()
       refetch()
     },
     onError: () => {

@@ -69,7 +69,7 @@ const Banner = ({ selectedCategory }) => {
     <div className="my-10 mx-7 lg:mx-10 w-auto md:max-w-4xl lg:max-w-5xl">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-center">
         {currentCards.map((product) => (
-          <Card key={product.id} card={product} refetch={refetch}/>
+          <Card key={product.id} card={product} />
         ))}
       </div>
 
