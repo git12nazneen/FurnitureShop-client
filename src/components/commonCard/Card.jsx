@@ -122,7 +122,7 @@ const Card = ({ card }) => {
         <button
           onClick={handleAddToCart}
           className={`text-center py-3 rounded-md mb-2 w-full ${
-            piece > 0 ? "bg-black text-white" : "bg-gray-400 cursor-not-allowed"
+            piece > 0 ? "bg-black text-white group-hover:bg-sky-500 group-hover:text-black" : "bg-gray-400 cursor-not-allowed"
           }`}
           disabled={piece === 0}
         >
