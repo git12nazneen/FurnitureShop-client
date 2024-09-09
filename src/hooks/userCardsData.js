@@ -1,17 +1,12 @@
 import { useState, useEffect } from "react";
-
 import { calculateSubtotalPrice, calculateTotalDiscount, calculateTotalPrice } from "../utilis/calculate";
 import { useQuery } from "@tanstack/react-query";
 
 const useCardsData = (user) => {
-  // const [cards, setCards] = useState([]);
   const [userCards, setUserCards] = useState([]);
   const [isCheckoutDisabled, setIsCheckoutDisabled] = useState(false);
 
-  // Fetch data from the server
- 
-
-  const { isLoading, error, data: cards ,refetch} = useQuery({
+  const { isLoading, error, data: cards = [], refetch } = useQuery({
     queryKey: ["cards"],
     queryFn: async () => {
       const res = await fetch("https://server-zeta-nine-87.vercel.app/cards");
@@ -22,10 +17,9 @@ const useCardsData = (user) => {
     },
   });
 
-  // Filter user-specific cards and manage checkout button state
   useEffect(() => {
     if (user) {
-      const filteredCards = cards.filter(
+      const filteredCards = (cards || []).filter(
         (card) => card.email?.toLowerCase().trim() === user.email?.toLowerCase().trim()
       );
       setUserCards(filteredCards);
@@ -33,7 +27,6 @@ const useCardsData = (user) => {
     }
   }, [cards, user]);
 
-  // Calculate prices
   const subtotalPrice = calculateSubtotalPrice(userCards);
   const totalDiscount = calculateTotalDiscount(userCards);
   const totalPrice = calculateTotalPrice(subtotalPrice, totalDiscount);
@@ -48,9 +41,9 @@ const useCardsData = (user) => {
     setUserCards,
     refetch,
     isLoading,
-     error
-
+    error
   };
 };
 
 export default useCardsData;
+

@@ -69,7 +69,7 @@ const Product = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto px-10 lg:px-0">
       <h1 className="text-3xl font-bold my-10">An Overview of your order list</h1>
       <div className="flex flex-col lg:flex-row gap-14">
         {/* Product Section */}
@@ -126,7 +126,7 @@ const Product = () => {
           )}
         </div>
         {/* Checkout Section */}
-        <div className="w-full lg:w-1/3 -mt-16 mb-10">
+        <div className="w-full lg:w-1/3 mt-0 lg:-mt-16 mb-10">
           <h1 className="text-3xl font-bold">Order Details</h1>
           <div className="mt-4 bg-gray-100 border rounded-lg">
             <div className="border-t space-y-2 border-gray-200 px-4 py-6 sm:px-6">
