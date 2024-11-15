@@ -66,8 +66,9 @@ const Banner = ({ selectedCategory }) => {
   const pageNumbers = [...Array(totalPages).keys()].map((num) => num + 1);
 
   return (
+    <div className='mx-auto'>
     <div className="my-10 mx-7 lg:mx-10 w-auto md:max-w-4xl lg:max-w-5xl">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-center ">
         {currentCards.map((product) => (
           <Card key={product.id} card={product} />
         ))}
@@ -108,6 +109,7 @@ const Banner = ({ selectedCategory }) => {
           <FaAngleRight />
         </button>
       </div>
+    </div>
     </div>
   );
 };
